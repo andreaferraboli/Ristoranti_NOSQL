@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3 id="id01"></h3>
+    <pre id="dump-db"></pre>
+    <script type="module">
+        // documentazione 
+        // https://firebase.google.com/docs/firestore?authuser=0
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAcsQo6OOF0QRYmIqxo2xnkSdWfy2xUpsM",
+            authDomain: "tpsit-342b7.firebaseapp.com",
+            databaseURL: "https://tpsit-342b7-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "tpsit-342b7",
+            storageBucket: "tpsit-342b7.appspot.com",
+            messagingSenderId: "718162960860",
+            appId: "1:718162960860:web:1e9a7ffb44a92bc7306f19"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // get realtyme databse reference
+        // self. to let firebase be global from other modules
+        self.firestore = getFirestore(app);
+    </script>
+
+    <script type="module">
+        import { doc, getDoc,getDocs, collection } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+
+        const output1 = document.getElementById("id01");
+        var docRef = doc(firestore, "libri","1");
+        var snap = await getDoc(docRef);
+        if (snap.exists()) {
+            var libro = snap.data();
+            console.log("Document data:", libro);
+            output1.innerHTML = libro.argomento;
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+
+        // recupera e stampa tutto il database in json
+        const outdump = document.getElementById("dump-db");
+        const querySnapshot = await getDocs(collection(firestore,"libri"));
+        console.log(querySnapshot);
+        var html = "";
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            html += doc.id+ " => "+ JSON.stringify(doc.data(), null, 2)+"</br>";
+            console.log(doc.id, " => ", doc.data());
+        });
+        outdump.innerHTML = html;
+    </script>
+
+
+</body>
+
+</html>
