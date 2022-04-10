@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
 
 <body>
-    <h3 id="id01"></h3>
-    <pre id="dump-db"></pre>
+<h3 id="id01"></h3>
+<pre id="dump-db"></pre>
 
-    <script type="module">
-        // documentazione
-        // https://firebase.google.com/docs/database/web/read-and-write
-        
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-        import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+<script type="module">
+    // documentazione
+    // https://firebase.google.com/docs/database/web/read-and-write
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAh3_aER3GwOuXCrgn3kIEtWPa4x54gJMU",
-            authDomain: "itis-tpsit.firebaseapp.com",
-            databaseURL: "https://itis-tpsit-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "itis-tpsit",
-            storageBucket: "itis-tpsit.appspot.com",
-            messagingSenderId: "17163683073",
-            appId: "1:17163683073:web:7328786ed5d6cb5f368700",
-            measurementId: "G-2CSB770LH3"
-        };
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        // get realtyme databse reference
-        // self. to let firebase be global from other modules
-        self.firebase = getDatabase(app);
-    </script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
+        authDomain: "ristoranti-31ef8.firebaseapp.com",
+        projectId: "ristoranti-31ef8",
+        storageBucket: "ristoranti-31ef8.appspot.com",
+        messagingSenderId: "236248778413",
+        appId: "1:236248778413:web:0b004e239a04c74793a824",
+        databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
+    };
 
-    <script type="module">
-        import { ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // get realtyme databse reference
+    // self. to let firebase be global from other modules
+    self.firebase = getDatabase(app);
+</script>
 
-        console.log(firebase);
-        
-        // recupera e stampa valore della chiave 'testo'
-        const output1 = document.getElementById("id01");
-        var dbRef = ref(firebase,'testo');
-        onValue(dbRef, snap => {
-            output1.innerHTML = snap.val();
-        });
+<script type="module">
+    import {
+        ref,
+        onValue,
+    } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 
-        // recupera e stampa tutto il database in json
-        const outdump = document.getElementById("dump-db");
-        dbRef = ref(firebase);
-        onValue(dbRef, snap => {
-            outdump.innerHTML = JSON.stringify(snap.val(), null, 2);
-        });      
-    </script>
+    console.log(firebase);
 
+    // recupera e stampa valore della chiave 'testo'
+    const output1 = document.getElementById("id01");
+    var dbRef = ref(firebase, "/Ristoranti/0/Recensione");
+    onValue(dbRef, (snap) => {
+        output1.innerHTML = snap.val();
+    });
+
+    // recupera e stampa tutto il database in json
+    const outdump = document.getElementById("dump-db");
+    dbRef = ref(firebase);
+    onValue(dbRef, (snap) => {
+        console.log(snap.val());
+        outdump.innerHTML = JSON.stringify(snap.val(), null, 2);
+    });
+</script>
 </body>
-
 </html>
