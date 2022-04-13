@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Yellgo Bootstrap Template - Index</title>
+    <title>theFork Bootstrap Template - Index</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -28,13 +28,9 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/restaurant.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Yellgo - v3.7.0
-    * Template URL: https://bootstrapmade.com/Yellgo-restaurant-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+
 </head>
 
 <body>
@@ -44,7 +40,7 @@
 <header id="header" class="fixed-top d-flex align-items-cente">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="index.html">Yellgo</a></h1>
+        <h1 class="logo me-auto me-lg-0"><a href="index.html">theFork</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -69,7 +65,7 @@
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
         <div class="row">
             <div class="col-lg-8">
-                <h1>Welcome to <span>Yellgo</span></h1>
+                <h1>Welcome to <span>theFork</span></h1>
                 <h2>Delivering great food for more than 18 years!</h2>
 
                 <div class="btns">
@@ -215,58 +211,45 @@
                 onValue(dbRef, (snap) => {
                     const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
                     console.log(obj);
-                    obj.forEach(function (element) {
-                        var stringBuilder = '<div class="section-bg">';
-                        stringBuilder += '<div class="card" style="width: 500px;">'
+                    console.log(obj[0].Posizione.link);
+                    for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
+                        // `i` will take on the values `0`, `1`, `2`,..., i.e. in each iteration
+                        // we can access the next element in the array with `data.items[i]`, example:
+                        //
+                        // var obj = data.items[i];
+                        //
+                        // Since each element is an object (in our example),
+                        // we can now access the objects properties with `obj.id` and `obj.name`.
+                        // We could also use `data.items[i].id`.
+                        var stringBuilder = '<section class="restaurant-section section-bg">';
+                        stringBuilder += '<div class="card" >'
                         stringBuilder += '<div class="row no-gutters">'
-                        stringBuilder += '<div class="col-sm-5">'
-                        stringBuilder += '<img class="card-img" src="/images/defaultimg.png" alt="Suresh Dasari Card">'
+                        stringBuilder += '<div class="col-sm-5 ">'
+                        stringBuilder += '<img class="cardImg" src="' + obj[i].img + '" alt="Suresh Dasari Card">'
                         stringBuilder += '</div>'
-                        stringBuilder += '<div class="col-sm-7">'
+                        stringBuilder += '<div class="col-sm-7 card-div">'
                         stringBuilder += '<div class="card-body">'
-                        stringBuilder += '<h5 class="card-title">Suresh Dasari</h5>'
-                        stringBuilder += '<p class="card-text">Suresh Dasari is a founder and technical lead developer'
-                        stringBuilder += 'in tutlane.</p>'
-                        stringBuilder += '<a href="#" class="btn btn-primary">View Profile</a>'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
+                        stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via+","+obj[i].Posizione["numero civico"]+","+ obj[i].Posizione.cap+", "+obj[i].Posizione.città + '</h5></div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant">Sito</a>'
+                        stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant">Menù</a>'
+                        stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant">Portami li</a>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
-                        // stringBuilder += '<article class="postcard dark blue">'
-                        // stringBuilder += '<a class="postcard__img_link" href="#">'
-                        // stringBuilder += '<img class="postcard__img" src="https://picsum.photos/1000/1000"'
-                        // stringBuilder += 'alt="Image Title"/>'
-                        // stringBuilder += '</a>'
-                        // stringBuilder += '<div class="postcard__text">'
-                        // stringBuilder += '<h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>'
-                        // stringBuilder += '<div class="postcard__subtitle small">'
-                        // stringBuilder += '<time dateTime="2020-05-25 12:00:00">'
-                        // stringBuilder += '<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020'
-                        // stringBuilder += '</time>'
-                        // stringBuilder += '</div>'
-                        // stringBuilder += '<div class="postcard__bar"></div>'
-                        // stringBuilder += '<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur'
-                        // stringBuilder += 'adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit'
-                        // stringBuilder += 'minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores'
-                        // stringBuilder += 'velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam'
-                        // stringBuilder += 'adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim'
-                        // stringBuilder += 'quidem excepturi, illum quos!'
-                        // stringBuilder += '</div>'
-                        // stringBuilder += '<ul class="postcard__tagbox">'
-                        // stringBuilder += '<li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>'
-                        // stringBuilder += '<li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>'
-                        // stringBuilder += '<li class="tag__item play blue">'
-                        // stringBuilder += '<a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>'
-                        // stringBuilder += '</li>'
-                        // stringBuilder += '</ul>'
-                        // stringBuilder += '</div>'
-                        // stringBuilder += '</article>'
-                        // stringBuilder += '</div>'
-                        stringBuilder += '<div class="container">'
-                        stringBuilder += ('<h3>' + element["Nome"] + '</h3>');
-                        stringBuilder += ('</div>')
+                        stringBuilder += '</section>'
                         output1.innerHTML += stringBuilder;
-                    });
+                    }
                 });
 
                 // recupera e stampa tutto il database in json
@@ -277,6 +260,7 @@
                 //   outdump.innerHTML = JSON.stringify(snap.val(), null, 2);
                 // });
             </script>
+
         </div>
     </section>
     <!-- ======= Menu Section ======= -->
@@ -668,7 +652,7 @@
 
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-info">
-                        <h3>Yellgo</h3>
+                        <h3>theFork</h3>
                         <p>
                             A108 Adam Street <br>
                             NY 535022, USA<br><br>
@@ -722,7 +706,7 @@
 
     <div class="container">
         <div class="copyright">
-            &copy; Copyright <strong><span>Yellgo</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>theFork</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
