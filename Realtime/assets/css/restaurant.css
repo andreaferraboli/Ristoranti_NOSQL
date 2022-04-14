@@ -25,10 +25,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:3%;
+    padding:1%;
+    position: relative;
 }
 .cardImg{
-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Img{
+    width: 500px;
 }
 .restaurant-section{
     height: 100%;

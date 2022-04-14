@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>theFork Bootstrap Template - Index</title>
+    <title>theFork</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -49,7 +49,7 @@
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
                 <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-                <li><a class="nav-link scrollto" href="#restaurantsSection">Ristoranti</a></li>
+                <li><a class="nav-link scrollto" href="restaurants.html">Ristoranti</a></li>
                 <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
             </ul>
@@ -163,223 +163,6 @@
 
         </div>
     </section><!-- End Why Us Section -->
-
-    <!-- Restaurants Array-->
-
-
-    <section id="restaurantsSection" class="menu section-bg">
-        <div id="restaurants" class="container" data-aos="fade-up">
-            <script type="module">
-                // documentazione
-                // https://firebase.google.com/docs/database/web/read-and-write
-
-                // Import the functions you need from the SDKs you need
-                import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-                import {getDatabase} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-                // TODO: Add SDKs for Firebase products that you want to use
-                // https://firebase.google.com/docs/web/setup#available-libraries
-
-                // Your web app's Firebase configuration
-                const firebaseConfig = {
-                    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
-                    authDomain: "ristoranti-31ef8.firebaseapp.com",
-                    projectId: "ristoranti-31ef8",
-                    storageBucket: "ristoranti-31ef8.appspot.com",
-                    messagingSenderId: "236248778413",
-                    appId: "1:236248778413:web:0b004e239a04c74793a824",
-                    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
-                };
-
-                // Initialize Firebase
-                const app = initializeApp(firebaseConfig);
-                // get realtyme databse reference
-                // self. to let firebase be global from other modules
-                self.firebase = getDatabase(app);
-            </script>
-
-            <script type="module">
-                import {
-                    ref,
-                    onValue,
-                } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-
-                console.log(firebase);
-
-                // recupera e stampa valore della chiave 'testo'
-                const output1 = document.getElementById("restaurants");
-                var dbRef = ref(firebase, "/Ristoranti/");
-                onValue(dbRef, (snap) => {
-                    const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
-                    console.log(obj);
-                    console.log(obj[0].Posizione.link);
-                    for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
-                        // `i` will take on the values `0`, `1`, `2`,..., i.e. in each iteration
-                        // we can access the next element in the array with `data.items[i]`, example:
-                        //
-                        // var obj = data.items[i];
-                        //
-                        // Since each element is an object (in our example),
-                        // we can now access the objects properties with `obj.id` and `obj.name`.
-                        // We could also use `data.items[i].id`.
-                        var stringBuilder = '<section class="restaurant-section section-bg">';
-                        stringBuilder += '<div class="card" >'
-                        stringBuilder += '<div class="row no-gutters">'
-                        stringBuilder += '<div class="col-sm-5 ">'
-                        stringBuilder += '<img class="cardImg" src="' + obj[i].img + '" alt="Suresh Dasari Card">'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="col-sm-7 card-div">'
-                        stringBuilder += '<div class="card-body">'
-                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-                        stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
-                        stringBuilder += '<div class="card-item">'
-                        stringBuilder += '<div class="col-sm-6">'
-                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via+","+obj[i].Posizione["numero civico"]+","+ obj[i].Posizione.cap+", "+obj[i].Posizione.città + '</h5></div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="col-sm-6">'
-                        stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="card-item">'
-                        stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant">Sito</a>'
-                        stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant">Menù</a>'
-                        stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant">Portami li</a>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</section>'
-                        output1.innerHTML += stringBuilder;
-                    }
-                });
-
-                // recupera e stampa tutto il database in json
-                // const outdump = document.getElementById("dump-db");
-                // dbRef = ref(firebase);
-                // onValue(dbRef, (snap) => {
-                //   console.log(snap.val());
-                //   outdump.innerHTML = JSON.stringify(snap.val(), null, 2);
-                // });
-            </script>
-
-        </div>
-    </section>
-    <!-- ======= Menu Section ======= -->
-    <section id="menu" class="menu section-bg">
-        <div class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>Menu</h2>
-                <p>Check Our Tasty Menu</p>
-            </div>
-
-            <div class="row" data-aos="fade-up" data-aos-delay="100">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <ul id="menu-flters">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-starters">Starters</li>
-                        <li data-filter=".filter-salads">Salads</li>
-                        <li data-filter=".filter-specialty">Specialty</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
-
-                <div class="col-lg-6 menu-item filter-starters">
-                    <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Lobster Bisque</a><span>$5.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Bread Barrel</a><span>$6.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-starters">
-                    <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Crab Cake</a><span>$7.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Caesar Selections</a><span>$8.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Tuscan Grilled</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Grilled chicken with provolone, artichoke hearts, and roasted red pesto
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-starters">
-                    <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Mozzarella Stick</a><span>$4.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Greek Salad</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Fresh spinach, crisp romaine, tomatoes, and Greek olives
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Spinach Salad</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
-                    <div class="menu-content">
-                        <a href="#">Lobster Roll</a><span>$12.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Menu Section -->
-
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials section-bg">
@@ -650,72 +433,47 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="footer-info">
                         <h3>theFork</h3>
                         <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            La Fourchette SAS<br>
+                            70, rue Saint-Lazare<br>
+                            75009 Parigi, Francia<br><br>
+                            <strong>Phone:</strong> +39 06 8938 6375<br>
+                            <strong>Email:</strong> contatto@thefork.it<br>
                         </p>
                         <div class="social-links mt-3">
                             <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="https://www.facebook.com/TheFork.it" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/thefork_it/" class="instagram"><i class="bx bxl-instagram"></i></a>
                             <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
                             <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-6 footer-links">
+                <div class="col-lg-6 col-md-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><a class="bx bx-chevron-right" href="#hero">Home</a></li>
+                        <li><a class="bx bx-chevron-right" href="#about">About</a></li>
+                        <li><a class="bx bx-chevron-right" href="#menu">Menu</a></li>
+                        <li><a class="bx bx-chevron-right" href="#restaurantsSection">Ristoranti</a></li>
+                        <li><a class="bx bx-chevron-right" href="#gallery">Gallery</a></li>
+                        <li><a class="bx bx-chevron-right" href="#contact">Contact</a></li>
                     </ul>
                 </div>
 
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
 
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
 
-                </div>
+
 
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong><span>theFork</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </div>
+
 </footer><!-- End Footer -->
 
 <div id="preloader"></div>
