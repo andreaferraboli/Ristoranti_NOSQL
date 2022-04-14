@@ -37,40 +37,30 @@
 
 
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top d-flex align-items-cente">
+<header id="header" class="fixed-top d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
         <h1 class="logo me-auto me-lg-0"><a href="index.html">theFork</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar order-last order-lg-0">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-                <li><a class="nav-link scrollto" href="#restaurantsSection">Ristoranti</a></li>
-                <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
         <a href="login.html" class="book-a-table-btn scrollto d-none d-lg-flex">ADMIN</a>
 
     </div>
 </header><!-- End Header -->
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center hero2">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
         <div class="row">
             <div class="col-lg-8">
-                <h1>Welcome to <span>theFork</span></h1>
-                <h2>Delivering great food for more than 18 years!</h2>
+                <h1>i ristoranti di <span>theFork</span></h1>
+                <h2>Da oltre 10 anni i migliori ristoranti della lombarda!</h2>
 
                 <div class="btns">
-                    <a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
-                    <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
+                    <a href="restaurants.html" class="btn-book animated fadeInUp scrollto">I Nostri Ristoranti</a>
                 </div>
             </div>
 
@@ -80,12 +70,15 @@
 
 <main id="main">
 
-
     <!-- Restaurants Array-->
 
 
     <section id="restaurantsSection" class="menu section-bg">
         <div id="restaurants" class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>ristoranti</h2>
+                <p>Ecco i nostri ristoranti</p>
+            </div>
             <script type="module">
                 // documentazione
                 // https://firebase.google.com/docs/database/web/read-and-write
@@ -304,8 +297,8 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Contact</h2>
-                <p>Contact Us</p>
+                <h2>Contatti</h2>
+                <p>Contattaci</p>
             </div>
         </div>
 
@@ -317,29 +310,32 @@
                     <div class="info">
                         <div class="address">
                             <i class="bi bi-geo-alt"></i>
-                            <h4>Location:</h4>
-                            <p>A108 Adam Street, New York, NY 535022</p>
+                            <h4>Sede:</h4>
+                            <p>
+                                La Fourchette SAS,
+                                70, rue Saint-Lazare,
+                                75009 Parigi, Francia</p>
                         </div>
 
                         <div class="open-hours">
                             <i class="bi bi-clock"></i>
-                            <h4>Open Hours:</h4>
+                            <h4>Orari in cui siamo aperti:</h4>
                             <p>
-                                Monday-Saturday:<br>
-                                11:00 AM - 2300 PM
+                                Lunedi-Sabato:<br>
+                                11:00 AM - 23:00 PM
                             </p>
                         </div>
 
                         <div class="email">
                             <i class="bi bi-envelope"></i>
                             <h4>Email:</h4>
-                            <p>info@example.com</p>
+                            <p>contatto@thefork.it</p>
                         </div>
 
                         <div class="phone">
                             <i class="bi bi-phone"></i>
-                            <h4>Call:</h4>
-                            <p>+1 5589 55488 55s</p>
+                            <h4>Chiama:</h4>
+                            <p>+39 06 8938 6375</p>
                         </div>
 
                     </div>
@@ -416,11 +412,10 @@
                     <h4>Useful Links</h4>
                     <ul>
                         <li><a class="bx bx-chevron-right" href="#hero">Home</a></li>
-                        <li><a class="bx bx-chevron-right" href="#about">About</a></li>
-                        <li><a class="bx bx-chevron-right" href="#menu">Menu</a></li>
+                        <li><a class="bx bx-chevron-right" href="index.html#about">Chi siamo</a></li>
                         <li><a class="bx bx-chevron-right" href="#restaurantsSection">Ristoranti</a></li>
-                        <li><a class="bx bx-chevron-right" href="#gallery">Gallery</a></li>
-                        <li><a class="bx bx-chevron-right" href="#contact">Contact</a></li>
+                        <li><a class="bx bx-chevron-right" href="index.html#gallery">Galleria</a></li>
+                        <li><a class="bx bx-chevron-right" href="#contact">Contatti</a></li>
                     </ul>
                 </div>
 

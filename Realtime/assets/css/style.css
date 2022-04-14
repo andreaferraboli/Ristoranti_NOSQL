@@ -27,7 +27,9 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
 }
-
+.gold{
+  color: #cda45e;
+}
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -112,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   [data-aos-delay] {
-    transition-delay: 0 !important;
+    transition-delay: 0s !important;
   }
 }
 /*--------------------------------------------------------------
@@ -404,6 +406,10 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   padding: 0;
 }
+.hero2{
+  background: url("../img/hero2-bg.jpg") top center !important;
+  background-repeat: no-repeat;
+}
 #hero:before {
   content: "";
   background: rgba(0, 0, 0, 0.5);
@@ -434,7 +440,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero h2 {
   color: #eee;
-  margin-bottom: 10px 0 0 0;
+  margin-bottom: 10px;
   font-size: 22px;
 }
 #hero .btns {
@@ -483,28 +489,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 100;
   transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
-#hero .play-btn::before {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  -webkit-animation-delay: 0s;
-  animation-delay: 0s;
-  -webkit-animation: pulsate-btn 2s;
-  animation: pulsate-btn 2s;
-  -webkit-animation-direction: forwards;
-  animation-direction: forwards;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  -webkit-animation-timing-function: steps;
-  animation-timing-function: steps;
-  opacity: 1;
-  border-radius: 50%;
-  border: 5px solid rgba(205, 164, 94, 0.7);
-  top: -15%;
-  left: -15%;
-  background: rgba(198, 16, 0, 0);
-}
+
 #hero .play-btn:hover::after {
   border-left: 15px solid #cda45e;
   transform: scale(20);
