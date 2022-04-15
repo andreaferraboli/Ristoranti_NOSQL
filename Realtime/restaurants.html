@@ -73,8 +73,8 @@
     <!-- Restaurants Array-->
 
 
-    <section id="restaurantsSection" class="menu section-bg">
-        <div id="restaurants" class="container" data-aos="fade-up">
+    <section id="restaurants" class="menu section-bg">
+        <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>ristoranti</h2>
                 <p>Ecco i nostri ristoranti</p>
@@ -123,19 +123,11 @@
                     console.log(obj);
                     console.log(obj[0].Posizione.link);
                     for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
-                        // `i` will take on the values `0`, `1`, `2`,..., i.e. in each iteration
-                        // we can access the next element in the array with `data.items[i]`, example:
-                        //
-                        // var obj = data.items[i];
-                        //
-                        // Since each element is an object (in our example),
-                        // we can now access the objects properties with `obj.id` and `obj.name`.
-                        // We could also use `data.items[i].id`.
                         var stringBuilder = '<section class="restaurant-section section-bg">';
                         stringBuilder += '<div class="card" >'
                         stringBuilder += '<div class="row no-gutters">'
                         stringBuilder += '<div class="col-sm-5 cardImg">'
-                        stringBuilder += '<img class="Img" src="' + obj[i].img + '" alt="Suresh Dasari Card">'
+                        stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
                         stringBuilder += '</div>'
                         stringBuilder += '<div class="col-sm-7 card-div">'
                         stringBuilder += '<div class="card-body">'
@@ -143,16 +135,17 @@
                         stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
                         stringBuilder += '<div class="card-item">'
                         stringBuilder += '<div class="col-sm-6">'
-                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via+","+obj[i].Posizione["numero civico"]+","+ obj[i].Posizione.cap+", "+obj[i].Posizione.città + '</h5></div>'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via+","+obj[i].Posizione["numero_civico"]+","+ obj[i].Posizione.cap+", "+obj[i].Posizione.città + '</h5></div>'
                         stringBuilder += '</div>'
                         stringBuilder += '<div class="col-sm-6">'
                         stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
                         stringBuilder += '<div class="card-item">'
-                        stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant">Sito</a>'
-                        stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant">Menù</a>'
-                        stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant">Portami li</a>'
+                        stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
+                        stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
+                        stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                        stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'
@@ -161,14 +154,6 @@
                         output1.innerHTML += stringBuilder;
                     }
                 });
-
-                // recupera e stampa tutto il database in json
-                // const outdump = document.getElementById("dump-db");
-                // dbRef = ref(firebase);
-                // onValue(dbRef, (snap) => {
-                //   console.log(snap.val());
-                //   outdump.innerHTML = JSON.stringify(snap.val(), null, 2);
-                // });
             </script>
 
         </div>
@@ -413,7 +398,7 @@
                     <ul>
                         <li><a class="bx bx-chevron-right" href="#hero">Home</a></li>
                         <li><a class="bx bx-chevron-right" href="index.html#about">Chi siamo</a></li>
-                        <li><a class="bx bx-chevron-right" href="#restaurantsSection">Ristoranti</a></li>
+                        <li><a class="bx bx-chevron-right" href="#restaurants">Ristoranti</a></li>
                         <li><a class="bx bx-chevron-right" href="index.html#gallery">Galleria</a></li>
                         <li><a class="bx bx-chevron-right" href="#contact">Contatti</a></li>
                     </ul>

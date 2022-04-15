@@ -1,21 +1,23 @@
 .card{
-    background: #0c0b09;
+    background: var(--secondary-color);
     height: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 .btn-restaurant {
-    margin: 0 0 0 15px;
-    border: 2px solid #cda45e;
-    color: #fff;
+    margin: 0 0 0 2%;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
     border-radius: 50px;
-    padding: 8px 25px;
+    padding: 2% 6%;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 80%;
     font-weight: 500;
     letter-spacing: 1px;
     transition: 0.3s;
 }
 .star{
-    color: #cda45e;
+    color: var(--primary-color);
     font-size: 150%;
 }
 .card-body {
@@ -34,7 +36,7 @@
     align-items: center;
 }
 .Img{
-    width: 500px;
+    width:100%;
 }
 .restaurant-section{
     height: 100%;

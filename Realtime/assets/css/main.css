@@ -51,7 +51,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #fff;
+  color: var(--text-color);
 }
 
 /*---------------------------------------------*/
@@ -196,7 +196,7 @@ iframe {
 .login100-form {
   width: 100%;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--text-color);
 }
 
 .login100-form-logo {
@@ -213,14 +213,14 @@ iframe {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--text-color);
   margin: 0 auto;
 }
 
 .login100-form-title {
   font-family: Ubuntu-Bold;
   font-size: 28px;
-  color: #fff;
+  color: var(--text-color);
   line-height: 1.2;
   text-align: center;
   text-transform: uppercase;
@@ -281,11 +281,11 @@ iframe {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 
-  background: #cda45e;
-  background: -webkit-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: -o-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: -moz-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: linear-gradient(left, #cda45e, #cda45e, #cda45e);
+  background: var(--primary-color);
+  background: -webkit-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: -o-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: -moz-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
 }
 
 .focus-input100::after {
@@ -313,7 +313,7 @@ iframe {
 
 .input100:focus + .focus-input100::after {
   left: 23px;
-  color: #cda45e;
+  color: var(--primary-color);
 }
 
 .input100:focus + .focus-input100::before {
@@ -322,7 +322,7 @@ iframe {
 
 .has-val.input100 + .focus-input100::after {
   left: 23px;
-  color: #cda45e;
+  color: var(--primary-color);
 }
 
 .has-val.input100 + .focus-input100::before {
@@ -350,7 +350,7 @@ iframe {
 .login100-form-btn {
   font-family: Ubuntu-Bold;
   font-size: 18px;
-  color: #fff;
+  color: var(--text-color);
   line-height: 1.2;
   text-transform: uppercase;
 
@@ -366,11 +366,11 @@ iframe {
   height: 42px;
   border-radius: 21px;
 
-  background: #cda45e;
-  background: -webkit-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: -o-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: -moz-linear-gradient(left, #cda45e, #cda45e, #cda45e);
-  background: linear-gradient(left, #cda45e, #cda45e, #cda45e);
+  background: var(--primary-color);
+  background: -webkit-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: -o-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: -moz-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
+  background: linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
   position: relative;
   z-index: 1;
 
@@ -420,7 +420,7 @@ iframe {
   content: attr(data-validate);
   position: absolute;
   max-width: 70%;
-  background-color: #fff;
+  background-color: var(--text-color);
   border: 1px solid #c80000;
   border-radius: 2px;
   padding: 4px 25px 4px 10px;

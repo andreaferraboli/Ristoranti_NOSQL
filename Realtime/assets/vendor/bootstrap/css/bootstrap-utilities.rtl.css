@@ -496,7 +496,7 @@
 }
 
 .border-white {
-  border-color: #fff !important;
+  border-color: var(--text-color) !important;
 }
 
 .border-1 {
