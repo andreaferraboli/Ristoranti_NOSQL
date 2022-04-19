@@ -44,7 +44,7 @@
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <a href="login.html" class="book-a-table-btn scrollto d-none d-lg-flex">ADMIN</a>
+        <a href="login.html" class="book-a-table-btn scrollto d-none d-lg-flex">Inserisci Ristorante</a>
 
     </div>
 </header><!-- End Header -->
@@ -56,8 +56,8 @@
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
         <div class="row">
             <div class="col-lg-8">
-                <h1>i ristoranti di <span>theFork</span></h1>
-                <h2>Da oltre 10 anni i migliori ristoranti della lombarda!</h2>
+                <h1>Sezione ADMIN di <span>theFork</span></h1>
+                <h2>modifica,elimina e aggiungi ristoranti a tuo piacimento</h2>
 
                 <div class="btns">
                     <a href="restaurants.html" class="btn-book animated fadeInUp scrollto">I Nostri Ristoranti</a>
@@ -104,36 +104,49 @@
                 const app = initializeApp(firebaseConfig);
                 // get realtyme databse reference
                 // self. to let firebase be global from other modules
-                self.firebase = getDatabase(app);
-            </script>
-
-            <script type="module">
                 import {
-                    ref,
-                    onValue,
+                    ref, onValue, query, orderByChild, equalTo, remove,limitToFirst
                 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+                const db = getDatabase();
 
                 console.log(db);
-
                 // recupera e stampa valore della chiave 'testo'
                 const output1 = document.getElementById("restaurants");
-                let dbRef = ref(db, "/Ristoranti/");
+                // var dbRef = ref(db, "/Ristoranti/");
+                let dbRef = query(ref(db, '/Ristoranti/'));
+                onValue(dbRef, (snap) => {
+                    const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
+                    for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
+                        let stringBuilder = '<section class="restaurant-section section-bg">';
+                        stringBuilder += '<div class="card" >'
+                        stringBuilder += '<div class="row no-gutters">'
+                        stringBuilder += '<div class="col-sm-5 cardImg">'
+                        stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="col-sm-7 card-div">'
+                        stringBuilder += '<div class="card-body">'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
+                        stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<button  onclick="eliminaRistorante(' + i + ');return false;" target="_blank" class="btn-delete" data-toggle="tooltip" data-placement="top" title="elimina">Elimina</button>'
+                        stringBuilder += '<button  onclick="modificaRistorante(' + i + ');return false;" target="_blank" class="btn-modify" data-toggle="tooltip" data-placement="top" title="modifica">Modifica</button>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</section>'
+                        output1.innerHTML += stringBuilder;
+                    }
+                });
 
-                function Insertdata() {
-                    set(ref(db, 'StudentsList/' + RollT.value), {
-                        Nameofstudent: NameT.value,
-                        RollNo: RollT.value,
-                        Section: SecT.value,
-                        Gender: GenT.value
-                    })
-                        .then(() => {
-                            alert("Data Added Successfully");
-                        })
-                        .catch((error) => {
-                            alert("Unseccussful, Error:" + error);
-                        });
-
-                }
             </script>
 
         </div>
@@ -408,6 +421,7 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/admin.js" type="module"></script>
 
 </body>
 

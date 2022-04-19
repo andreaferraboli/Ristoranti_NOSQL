@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <h1>i ristoranti di <span>theFork</span></h1>
-                <h2>Da oltre 10 anni i migliori ristoranti della lombarda!</h2>
+                <h2>Da oltre 10 anni i migliori ristoranti della Lombardia!</h2>
 
                 <div class="btns">
                     <a href="restaurants.html" class="btn-book animated fadeInUp scrollto">I Nostri Ristoranti</a>
@@ -113,11 +113,11 @@
                     onValue,
                 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 
-                console.log(firebase);
+                console.log(db);
 
                 // recupera e stampa valore della chiave 'testo'
                 const output1 = document.getElementById("restaurants");
-                var dbRef = ref(firebase, "/Ristoranti/");
+                let dbRef = ref(db, "/Ristoranti/");
                 onValue(dbRef, (snap) => {
                     const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
                     console.log(obj);
