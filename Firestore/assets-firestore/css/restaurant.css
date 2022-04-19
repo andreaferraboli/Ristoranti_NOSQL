@@ -1,0 +1,49 @@
+.card{
+    background: var(--secondary-color);
+    height: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+.btn-restaurant {
+    margin: 0 0 0 2%;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 50px;
+    padding: 2% 6%;
+    text-transform: uppercase;
+    font-size: 80%;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.star{
+    color: var(--primary-color);
+    font-size: 150%;
+}
+.card-body {
+    height: 100%;
+}
+.card-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1%;
+    position: relative;
+}
+.cardImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Img{
+    width:100%;
+}
+.restaurant-section{
+    height: 100%;
+}
+iframe{
+    width:100%;
+    height:300px;
+    border:0;
+    padding:5%;
+}
