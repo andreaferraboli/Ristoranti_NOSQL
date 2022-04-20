@@ -119,21 +119,6 @@
                 const output1 = document.getElementById("restaurants");
                 let dbRef = ref(db, "/Ristoranti/");
 
-                function Insertdata() {
-                    set(ref(db, 'StudentsList/' + RollT.value), {
-                        Nameofstudent: NameT.value,
-                        RollNo: RollT.value,
-                        Section: SecT.value,
-                        Gender: GenT.value
-                    })
-                        .then(() => {
-                            alert("Data Added Successfully");
-                        })
-                        .catch((error) => {
-                            alert("Unseccussful, Error:" + error);
-                        });
-
-                }
             </script>
 
         </div>
