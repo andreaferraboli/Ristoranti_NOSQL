@@ -34,12 +34,9 @@ function save() {
         alert("Compila tutti i campi");
         return false;
     }
-    database.ref('users/' + nome).set({
+    database.ref('ristoranti/' + nome).set({
         nome: nome,
-        via: via,
-        numero_civico: numero_civico,
-        cap: cap,
-        citta: citta,
+        posizione : { via : via, numero_civico : numero_civico, citta : citta, cap : cap},
         link: link,
         maps: maps,
         recensione: recensione,
