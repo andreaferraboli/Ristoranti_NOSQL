@@ -216,7 +216,7 @@ iframe {
 .login100-form-title {
   font-family: Ubuntu-Bold;
   font-size: 28px;
-  color: var(--text-color);
+  color: var(--primary-color);
   line-height: 1.2;
   text-align: center;
   text-transform: uppercase;

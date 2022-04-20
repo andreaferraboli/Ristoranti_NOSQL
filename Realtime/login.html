@@ -10,9 +10,9 @@
     <!--===============================================================================================-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link href="../Firestore/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link href="../Firestore/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" type="text/css">
+    <link href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
     <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
@@ -174,7 +174,7 @@
                     .then(() => {
                         // Data saved successfully!
                         alert('user logged in successfully');
-
+                        window.location.href = 'admin.html';
                     })
                     .catch((error) => {
                         // The write failed...
