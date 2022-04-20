@@ -2,32 +2,33 @@
 <html lang="en">
 
 <head>
-    <title>Login V16</title>
-    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register V16</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="assets/img/icons/favicon.ico" />
+    <link href="assets/img/icons/favicon.ico" rel="icon" type="image/png"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../Firestore/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="../Firestore/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../Firestore/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link href="../Firestore/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link href="vendor/animate/animate.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link href="vendor/animsition/css/animsition.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link href="vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
     <!--===============================================================================================-->
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/util.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link href="assets/css/util.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet">
 
     <!--===============================================================================================-->
@@ -35,9 +36,11 @@
 
 <body>
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top d-flex align-items-center ">
+<header class="fixed-top d-flex align-items-center " id="header">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between p-l-150">
-        <h1 class="logo me-auto "><a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/favicon.png" alt="" class="img-fluid"></a><a class="logo" href="index.html">theFork</a></h1>
+        <h1 class="logo me-auto "><a class="logo me-auto me-lg-0" href="index.html"><img alt=""
+                                                                                         class="img-fluid" src="assets/img/favicon.png"></a><a
+                class="logo" href="index.html">theFork</a></h1>
     </div>
 </header><!-- End Header -->
 
@@ -47,25 +50,32 @@
 				<span class="login100-form-title p-b-41">
 					Account Login
 				</span>
-            <form class="login100-form validate-form p-b-33 p-t-5">
-
-                <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="username" placeholder="Username">
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="pass" placeholder="Password">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                </div>
-
-                <div class="container-login100-form-btn m-t-32">
-                    <button class="login100-form-btn">
-                        Login
-                    </button>
-                </div>
 
             </form>
+            <form class="login100-form validate-form p-b-33 p-t-5">
+                <div class="wrap-input100 validate-input">
+                    <h1>Register</h1>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" id="email" name="email" placeholder="Enter Email" required type="text">
+                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" id="psw" name="psw" placeholder="Password" required type="password">
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-32">
+                        <button class="login100-form-btn" class="registerbtn" id="submitData" name="submitData"
+                                type="button">Register
+                        </button>
+                    </div>
+
+
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -93,3 +103,102 @@
 </body>
 
 </html>
+
+<script type="module">
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+    //Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyBZn1RMg1jaFSKZEUuHOZwLyDM2s_VrWTc",
+        authDomain: "prova-2881d.firebaseapp.com",
+        databaseURL: "https://prova-2881d-default-rtdb.firebaseio.com",
+        projectId: "prova-2881d",
+        storageBucket: "prova-2881d.appspot.com",
+        messagingSenderId: "430537388837",
+        appId: "1:430537388837:web:abeeff9164a271480ee0cc",
+        measurementId: "G-Y5KYS4M1F9"
+    };
+
+    // Inizializzazione
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase(app);
+
+    submitData.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('psw').value;
+
+        // creazione utente
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ... user.uid
+                set(ref(database, 'users/' + user.uid), {
+                    email: email,
+                    password: password
+                })
+                    .then(() => {
+                        // Data saved successfully!
+                        alert('user created successfully');
+
+                    })
+                    .catch((error) => {
+                        // The write failed...
+                        alert(error);
+                    });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                alert(errorMessage);
+            });
+
+        // login
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                // ...
+
+                // save log in details into real time database
+                var lgDate = new Date();
+                update(ref(database, 'users/' + user.uid), {
+                    last_login: lgDate,
+                })
+                    .then(() => {
+                        // Data saved successfully!
+                        alert('user logged in successfully');
+
+                    })
+                    .catch((error) => {
+                        // The write failed...
+                        alert(error);
+                    });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+    }).catch((error) => {
+        // An error happened.
+    });
+
+    //log out
+    signOut(auth).then(() => {
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
+
+</script>
