@@ -194,6 +194,7 @@ iframe {
 [ Form ]*/
 
 .login100-form {
+  color: black;
   width: 100%;
   border-radius: 10px;
   background-color: var(--text-color);
