@@ -220,7 +220,20 @@ iframe {
   line-height: 1.2;
   text-align: center;
   text-transform: uppercase;
+  margin-top: 10%;
+  margin-bottom: -10%;
+  display: block;
+}
 
+.login100-form-subtitle {
+  font-family: Ubuntu-Bold;
+  font-size: 20px;
+  color: var(--primary-color);
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 5%;
+  margin-bottom: -15%;
   display: block;
 }
 

@@ -132,42 +132,28 @@
         var email = document.getElementById('email').value;
         var password = document.getElementById('psw').value;
 
-        // creazione utente
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in
                 const user = userCredential.user;
-                // ... user.uid
                 set(ref(database, 'users/' + user.uid), {
                     email: email,
                     password: password
                 })
                     .then(() => {
-                        // Data saved successfully!
                         alert('user created successfully');
                         window.location.href = 'login.html';
                     })
                     .catch((error) => {
-                        // The write failed...
                         alert(error);
                     });
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
                 alert(errorMessage);
             });
 
     }).catch((error) => {
-        // An error happened.
-    });
-
-    //log out
-    signOut(auth).then(() => {
-        // Sign-out successful.
-    }).catch((error) => {
-        // An error happened.
     });
 
 </script>
