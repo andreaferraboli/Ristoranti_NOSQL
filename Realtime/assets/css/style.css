@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-delete,.btn-modify{
   margin: 0 0 0 2%;
   border-radius: 50px;
+  border: none !important;
   padding: 2% 6%;
   text-transform: uppercase;
   font-size: 80%;
@@ -51,6 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .btn-delete:hover,.btn-modify:hover{
   color:white;
+  border: none !important;
 }
 /*--------------------------------------------------------------
 # Preloader
