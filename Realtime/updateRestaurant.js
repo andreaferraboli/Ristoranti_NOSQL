@@ -1,4 +1,6 @@
 // Your web app's Firebase configuration
+import { ref, set, update, onValue, remove } from "firebase/database";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBZn1RMg1jaFSKZEUuHOZwLyDM2s_VrWTc",
     authDomain: "prova-2881d.firebaseapp.com",
