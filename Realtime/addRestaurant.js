@@ -44,4 +44,5 @@ function save() {
     })
 
     alert('Ristorante aggiunto')
+    location.href = 'index.html';
 }
