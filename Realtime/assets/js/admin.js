@@ -2,6 +2,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-a
 import {getDatabase, onValue, query, ref, remove} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
     authDomain: "ristoranti-31ef8.firebaseapp.com",
@@ -84,11 +85,9 @@ onValue(dbRef, (snap) => {
                     window.location.href = './admin.html';
                 }
                 if (e.target && e.target.id === 'button_modify_' + i) {
-                        if (typeof favDialog.showModal === "function") {
-                            favDialog.showModal();
-                        } else {
-                            outputBox.value = "Sorry, the <dialog> API is not supported by this browser.";
-                        }
+                     // update(i)
+                    window.location.href = './updateRestaurant.html';
+
                     }
             });
         }
