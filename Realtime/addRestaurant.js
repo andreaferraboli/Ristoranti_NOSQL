@@ -11,12 +11,9 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 // Set database variable
 var database = firebase.database()
-
 function save() {
-
     var nome = document.getElementById('nome').value
     var via = document.getElementById('via').value
     var numero_civico = document.getElementById('numero_civico').value
@@ -28,21 +25,20 @@ function save() {
     var sito = document.getElementById('sito').value
     var telefono = document.getElementById('telefono').value
     var immagine = document.getElementById('immagine').value
-
     if (nome == "" || via == "" || numero_civico == "" || cap == "" || citta == "" || link == "" || maps == "" || recensione == "" || sito == "" ||
         telefono == "" || immagine == "") {
         alert("Compila tutti i campi");
         return false;
     }
-    database.ref('Ristoranti/' ).push({
-        Nome: nome,
-        Posizione : { via : via, numero_civico : numero_civico, città : citta, cap : cap,link: link, mappa: maps},
-        Recensione: recensione,
-        "Sito web": sito,
-        Telefono: telefono,
-        Img: immagine
+    database.ref('ristoranti/' + nome).set({
+        nome: nome,
+        posizione : { via : via, numero_civico : numero_civico, citta : citta, cap : cap},
+        link: link,
+        maps: maps,
+        recensione: recensione,
+        sito: sito,
+        telefono: telefono,
+        immagine: immagine
     })
-
     alert('Ristorante aggiunto')
-    location.href = 'index.html';
 }
