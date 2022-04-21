@@ -1,18 +1,18 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBZn1RMg1jaFSKZEUuHOZwLyDM2s_VrWTc",
-    authDomain: "prova-2881d.firebaseapp.com",
-    databaseURL: "https://prova-2881d-default-rtdb.firebaseio.com",
-    projectId: "prova-2881d",
-    storageBucket: "prova-2881d.appspot.com",
-    messagingSenderId: "430537388837",
-    appId: "1:430537388837:web:abeeff9164a271480ee0cc",
-    measurementId: "G-Y5KYS4M1F9"
+    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
+    authDomain: "ristoranti-31ef8.firebaseapp.com",
+    projectId: "ristoranti-31ef8",
+    storageBucket: "ristoranti-31ef8.appspot.com",
+    messagingSenderId: "236248778413",
+    appId: "1:236248778413:web:0b004e239a04c74793a824",
+    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // Set database variable
 var database = firebase.database()
+
 function save() {
     var nome = document.getElementById('nome').value
     var via = document.getElementById('via').value
@@ -30,16 +30,18 @@ function save() {
         alert("Compila tutti i campi");
         return false;
     }
-    database.ref('ristoranti/' + nome).set({
-        nome: nome,
-        posizione : { via : via, numero_civico : numero_civico, citta : citta, cap : cap},
-        link: link,
-        maps: maps,
-        recensione: recensione,
-        sito: sito,
-        telefono: telefono,
-        immagine: immagine
+    database.ref('Ristoranti/').push({
+        Nome: nome,
+        Posizione: {via: via, numero_civico: numero_civico, città: citta, cap: cap, link: link, mappa: maps},
+        Recensione: recensione,
+        "Sito web": sito,
+        Telefono: telefono,
+        Img: immagine
     })
     alert('Ristorante aggiunto');
-    //location.href="index.html"; da sistemare pensavo funzionasse
+    // load();
+}
+
+function load() {
+    window.location.href = "admin.html";
 }

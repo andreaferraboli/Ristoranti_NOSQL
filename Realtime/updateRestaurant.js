@@ -1,18 +1,17 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyBZn1RMg1jaFSKZEUuHOZwLyDM2s_VrWTc",
-    authDomain: "prova-2881d.firebaseapp.com",
-    databaseURL: "https://prova-2881d-default-rtdb.firebaseio.com",
-    projectId: "prova-2881d",
-    storageBucket: "prova-2881d.appspot.com",
-    messagingSenderId: "430537388837",
-    appId: "1:430537388837:web:abeeff9164a271480ee0cc",
-    measurementId: "G-Y5KYS4M1F9"
+    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
+    authDomain: "ristoranti-31ef8.firebaseapp.com",
+    projectId: "ristoranti-31ef8",
+    storageBucket: "ristoranti-31ef8.appspot.com",
+    messagingSenderId: "236248778413",
+    appId: "1:236248778413:web:0b004e239a04c74793a824",
+    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
 };
 firebase.initializeApp(firebaseConfig);
 
 var nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine;
 
-function intial() {
+function initial() {
     nome = document.getElementById('nome').value;
     via = document.getElementById('via').value;
     numero_civico = document.getElementById('numero_civico').value;
@@ -27,10 +26,10 @@ function intial() {
 }
 
 document.getElementById('select').onclick = function() {
-    intial();
+    initial();
     firebase.database().ref('ristoranti/' + nome).on('value', function(snapshot) {
         document.getElementById('nome').value = snapshot.val().nome;
-        document.getElementById('via').value = snapshot.val().via;
+        document.getElementById('via').value = snapshot.val().Posizione.via;
         document.getElementById('numero_civico').value = snapshot.val().numero_civico;
         document.getElementById('cap').value = snapshot.val().cap;
         document.getElementById('citta').value = snapshot.val().citta;
@@ -45,7 +44,7 @@ document.getElementById('select').onclick = function() {
 }
 
 document.getElementById('update').onclick = function() {
-    intial();
+    initial();
     firebase.database().ref('ristoranti/' + nome).update({
         nome: nome,
         via: via,
