@@ -40,5 +40,6 @@ function save() {
         telefono: telefono,
         immagine: immagine
     })
-    alert('Ristorante aggiunto')
+    alert('Ristorante aggiunto');
+    //location.href="index.html"; da sistemare pensavo funzionasse
 }
