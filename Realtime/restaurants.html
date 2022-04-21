@@ -120,7 +120,7 @@
                 let dbRef = ref(firebase, "/Ristoranti/");
                 onValue(dbRef, (snap) => {
                     const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
-                    for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
+                    for (const i of Object.keys(obj)) {
                         var stringBuilder = '<section class="restaurant-section section-bg">';
                         stringBuilder += '<div class="card" >'
                         stringBuilder += '<div class="row no-gutters">'

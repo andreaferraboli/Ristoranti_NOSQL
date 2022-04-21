@@ -34,15 +34,13 @@ function save() {
         alert("Compila tutti i campi");
         return false;
     }
-    database.ref('ristoranti/' + nome).set({
-        nome: nome,
-        posizione : { via : via, numero_civico : numero_civico, citta : citta, cap : cap},
-        link: link,
-        maps: maps,
-        recensione: recensione,
-        sito: sito,
-        telefono: telefono,
-        immagine: immagine
+    database.ref('Ristoranti/' ).push({
+        Nome: nome,
+        Posizione : { via : via, numero_civico : numero_civico, città : citta, cap : cap,link: link, mappa: maps},
+        Recensione: recensione,
+        "Sito web": sito,
+        Telefono: telefono,
+        Img: immagine
     })
 
     alert('Ristorante aggiunto')
