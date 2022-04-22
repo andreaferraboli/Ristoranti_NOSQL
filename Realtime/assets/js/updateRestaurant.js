@@ -1,4 +1,3 @@
-export var currentId;
 const firebaseConfig = {
     apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
     authDomain: "ristoranti-31ef8.firebaseapp.com",
@@ -9,6 +8,7 @@ const firebaseConfig = {
     databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
 };
 firebase.initializeApp(firebaseConfig);
+let currentId=localStorage.getItem('currentId');
 console.log("currentId:"+currentId);
 let nome=document.getElementById('nome');
 let via=document.getElementById('via');
@@ -22,8 +22,7 @@ let sito=document.getElementById('sito');
 let telefono=document.getElementById('telefono');
 let immagine=document.getElementById('immagine');
 
-firebase.database().ref('Ristoranti/' + "1").on('value', function (snapshot) {
-    //Todo:dynamic id
+firebase.database().ref('Ristoranti/' + currentId).on('value', function (snapshot) {
     nome.value = snapshot.val().Nome;
     via.value = snapshot.val().Posizione.via;
     numero_civico.value = snapshot.val().Posizione.numero_civico;
@@ -37,7 +36,7 @@ firebase.database().ref('Ristoranti/' + "1").on('value', function (snapshot) {
     immagine.value = snapshot.val().Img;
 })
 document.getElementById('update').onclick = function () {
-    firebase.database().ref('Ristoranti/1').update({
+    firebase.database().ref('Ristoranti/'+currentId).update({
         Nome: nome.value,
         Posizione: {via: via.value, numero_civico: numero_civico.value, città: citta.value, cap: cap.value, link: link.value, mappa: maps.value},
         Recensione: recensione.value,
@@ -46,9 +45,5 @@ document.getElementById('update').onclick = function () {
         Img: immagine.value
     });
     alert("DATI AGGIORNATI");
+    window.location.href = '../Realtime/admin.html';
 }
-// export function update(ID) {
-//
-//     currentId = ID;
-//     console.log(currentId);
-// }

@@ -85,7 +85,7 @@
 
                 // Import the functions you need from the SDKs you need
                 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-                import {getDatabase} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+                import {getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
                 // TODO: Add SDKs for Firebase products that you want to use
                 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -104,55 +104,63 @@
                 const app = initializeApp(firebaseConfig);
                 // get realtyme databse reference
                 // self. to let firebase be global from other modules
-                self.firebase = getDatabase(app);
+                self.firebase = getFirestore(app);
             </script>
 
             <script type="module">
-                import {
-                    ref,
-                    onValue,
-                } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+
+                import { doc, getDoc, getDocs, collection, query } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
                 console.log(firebase);
 
-                // recupera e stampa valore della chiave 'testo'
-                const output1 = document.getElementById("restaurants");
-                var dbRef = ref(firebase, "/Ristoranti/");
-                onValue(dbRef, (snap) => {
-                    const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
-                    console.log(obj);
-                    console.log(obj[0].Posizione.link);
-                    for (let i = 0, l = Object.keys(obj).length; i < l; i++) {
-                        var stringBuilder = '<section class="restaurant-section section-bg">';
-                        stringBuilder += '<div class="card" >'
-                        stringBuilder += '<div class="row no-gutters">'
-                        stringBuilder += '<div class="col-sm-5 cardImg">'
-                        stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="col-sm-7 card-div">'
-                        stringBuilder += '<div class="card-body">'
-                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-                        stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
-                        stringBuilder += '<div class="card-item">'
-                        stringBuilder += '<div class="col-sm-6">'
-                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via+","+obj[i].Posizione["numero_civico"]+","+ obj[i].Posizione.cap+", "+obj[i].Posizione.città + '</h5></div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="col-sm-6">'
-                        stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '<div class="card-item">'
-                        stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
-                        stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-                        stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
-                        stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</div>'
-                        stringBuilder += '</section>'
-                        output1.innerHTML += stringBuilder;
-                    }
+                let collectionRef=collection(firebase, "ristoranti");
+                let docs=await getDocs(query(collectionRef));
+
+                //for(let i=1; i<=y;i++){
+                let i=0;
+                docs.forEach(
+                    (doc) =>{
+                    i=parseInt(doc.id);
+
+                    var Ristorante = doc.data();
+                    console.log(Ristorante);
+                    var Nome = Ristorante.informazioni.nome;
+                    var Img = Ristorante.informazioni.immagine;
+                    console.log(Nome);
+                    console.log(Img);
+
+                            // var stringBuilder = '<section class="restaurant-section section-bg">';
+                            // stringBuilder += '<div class="card" >'
+                            // stringBuilder += '<div class="row no-gutters">'
+                            // stringBuilder += '<div class="col-sm-5 cardImg">'
+                            // stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '<div class="col-sm-7 card-div">'
+                            // stringBuilder += '<div class="card-body">'
+                            // stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
+                            // stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
+                            // stringBuilder += '<div class="card-item">'
+                            // stringBuilder += '<div class="col-sm-6">'
+                            // stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '<div class="col-sm-6">'
+                            // stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '<div class="card-item">'
+                            // stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
+                            // stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
+                            // stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                            // stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '</div>'
+                            // stringBuilder += '</section>'
+                            // output1.innerHTML += stringBuilder;
+
+
+
                 });
             </script>
 
