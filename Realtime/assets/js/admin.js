@@ -85,8 +85,8 @@ onValue(dbRef, (snap) => {
                     window.location.href = './admin.html';
                 }
                 if (e.target && e.target.id === 'button_modify_' + i) {
-                     // currentId=i;
-                    window.location.href = './updateRestaurant.html';
+                     localStorage.setItem('currentId',i);
+                     window.location.href = './updateRestaurant.html';
 
                     }
             });
