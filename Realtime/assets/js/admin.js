@@ -1,5 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, query, ref, remove} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+// import {currentId} from "./updateRestaurant.js";
 
 
 
@@ -16,7 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const db = getDatabase();
+const db = getDatabase(app);
 
 console.log(db);
 // recupera e stampa valore della chiave 'testo'
@@ -85,7 +86,7 @@ onValue(dbRef, (snap) => {
                     window.location.href = './admin.html';
                 }
                 if (e.target && e.target.id === 'button_modify_' + i) {
-                     // update(i)
+                     // currentId=i;
                     window.location.href = './updateRestaurant.html';
 
                     }

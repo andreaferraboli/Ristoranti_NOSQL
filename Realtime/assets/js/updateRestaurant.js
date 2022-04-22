@@ -1,3 +1,4 @@
+export var currentId;
 const firebaseConfig = {
     apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
     authDomain: "ristoranti-31ef8.firebaseapp.com",
@@ -8,18 +9,18 @@ const firebaseConfig = {
     databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
 };
 firebase.initializeApp(firebaseConfig);
-var currentId;
-nome=document.getElementById('nome');
-via=document.getElementById('via');
-numero_civico=document.getElementById('numero_civico');
-cap=document.getElementById('cap');
-citta=document.getElementById('citta');
-link=document.getElementById('link');
-maps=document.getElementById('maps');
-recensione=document.getElementById('recensione');
-sito=document.getElementById('sito');
-telefono=document.getElementById('telefono');
-immagine=document.getElementById('immagine');
+console.log("currentId:"+currentId);
+let nome=document.getElementById('nome');
+let via=document.getElementById('via');
+let numero_civico=document.getElementById('numero_civico');
+let cap=document.getElementById('cap');
+let citta=document.getElementById('citta');
+let link=document.getElementById('link');
+let maps=document.getElementById('maps');
+let recensione=document.getElementById('recensione');
+let sito=document.getElementById('sito');
+let telefono=document.getElementById('telefono');
+let immagine=document.getElementById('immagine');
 
 firebase.database().ref('Ristoranti/' + "1").on('value', function (snapshot) {
     //Todo:dynamic id
