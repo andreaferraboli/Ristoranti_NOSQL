@@ -12,14 +12,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBZn1RMg1jaFSKZEUuHOZwLyDM2s_VrWTc",
-    authDomain: "prova-2881d.firebaseapp.com",
-    databaseURL: "https://prova-2881d-default-rtdb.firebaseio.com",
-    projectId: "prova-2881d",
-    storageBucket: "prova-2881d.appspot.com",
-    messagingSenderId: "430537388837",
-    appId: "1:430537388837:web:abeeff9164a271480ee0cc",
-    measurementId: "G-Y5KYS4M1F9"
+    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
+    authDomain: "ristoranti-31ef8.firebaseapp.com",
+    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
+    projectId: "ristoranti-31ef8",
+    storageBucket: "ristoranti-31ef8.appspot.com",
+    messagingSenderId: "236248778413",
+    appId: "1:236248778413:web:0b004e239a04c74793a824"
 };
 
 export const app = initializeApp(firebaseConfig);
