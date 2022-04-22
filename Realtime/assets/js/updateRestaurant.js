@@ -1,4 +1,4 @@
-export var currentId;
+// var currentId;
 const firebaseConfig = {
     apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
     authDomain: "ristoranti-31ef8.firebaseapp.com",
@@ -9,6 +9,7 @@ const firebaseConfig = {
     databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
 };
 firebase.initializeApp(firebaseConfig);
+// module.exports= {currentId};
 console.log("currentId:"+currentId);
 let nome=document.getElementById('nome');
 let via=document.getElementById('via');

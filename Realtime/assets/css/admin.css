@@ -74,7 +74,10 @@ input {
 	outline: none;
 	border: none;
 }
+#header {
 
+  top: 5px !important;
+}
 textarea {
   outline: none;
   border: none;
@@ -141,19 +144,18 @@ iframe {
 [ login ]*/
 
 .limiter {
-  width: 100%;
+  width:100%;
   margin: 0 auto;
 }
 
-.container-login100 {
-  width: 100%;
-  min-height: 100vh;
+.container-login {
+  width:100%;
+  min-height:100vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 15px;
@@ -165,23 +167,22 @@ iframe {
   z-index: 1;  
 }
 
-.container-login100::before {
+.container-login::before {
   content: "";
   display: block;
   position: absolute;
   z-index: -1;
-  width: 100%;
+  width:100%;
   height: 100%;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,0.65);
 }
 
-.wrap-login100 {
-  width: 390px;
-  border-radius: 10px;
+.wrap-login {
+  width: 80%;
   overflow: hidden;
-
+margin-top:2%;
   background: transparent;
 }
 
@@ -189,13 +190,13 @@ iframe {
 /*------------------------------------------------------------------
 [ Form ]*/
 
-.login100-form {
-  width: 100%;
+.admin {
+  width:100%;
   border-radius: 15px;
   background-color: var(--text-color);
 }
 
-.login100-form-logo {
+.admin-logo {
   font-size: 60px; 
   color: #333333;
 
@@ -213,26 +214,22 @@ iframe {
   margin: 0 auto;
 }
 
-.login100-form-title {
-  font-family: Ubuntu-Bold;
-  font-size: 28px;
+.admin-title {
+  font-family: Ubuntu;
+  font-size: 200%;
   color: var(--primary-color);
   line-height: 1.2;
   text-align: center;
-  text-transform: uppercase;
   margin-top: 1%;
   display: block;
 }
 
-.login100-form-subtitle {
-  font-family: Ubuntu-Bold;
-  font-size: 15px;
+.admin-subtitle {
+  font-family: Ubuntu;
+  font-size: 200%;
   color: var(--primary-color);
   line-height: 1.2;
   text-align: center;
-  text-transform: uppercase;
-  margin-top: 5%;
-  margin-bottom: -10%;
   display: block;
 }
 
@@ -240,24 +237,25 @@ iframe {
 /*------------------------------------------------------------------
 [ Input ]*/
 
-.wrap-input100 {
-  width: 100%;
+.wrap-input {
+  width:100%;
   position: relative;
   border-bottom: 1px solid #e6e6e6;
   padding: 2px;
 }
 
-.input100 {
+.input {
   font-family: Ubuntu-Regular;
-  font-size: 20px;
+  font-size: 100%;
   color: #555555;
   line-height: 1.2;
-
+border: 1px solid #000000;
+  border-radius:50px;
   display: block;
-  width: 100%;
+  width:100%;
   height: 50px;
   background: transparent;
-  padding: 0 10px 0 80px;
+  padding: 0 0 0 10px;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -265,17 +263,17 @@ iframe {
 }
 
 /*---------------------------------------------*/ 
-.focus-input100 {
+.focus-input {
   color: black;
   position: absolute;
   display: block;
-  width: 100%;
+  width:100%;
   height: 100%;
   margin: -77px 0px 0px;
   pointer-events: none;
 }
 
-.focus-input100::before {
+.focus-input::before {
   content: "";
   display: block;
   position: absolute;
@@ -290,20 +288,16 @@ iframe {
   transition: all 0.4s;
 
   background: var(--primary-color);
-  background: -webkit-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
-  background: -o-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
-  background: -moz-linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
-  background: linear-gradient(left, var(--primary-color), var(--primary-color), var(--primary-color));
 }
 
-.focus-input100::after {
+.focus-input::after {
   font-family: Linearicons-Free;
   font-size: 18px;
   color: #999999;
 
   content: attr(data-placeholder);
   display: block;
-  width: 100%;
+  width:100%;
   position: absolute;
   top: 40px;
   left: 35px;
@@ -315,37 +309,45 @@ iframe {
   transition: all 0.4s;
 }
 
-.input100:focus {
+.input:focus {
   padding-left: 60px;
 }
 
-.input100:focus + .focus-input100::after {
+.input:focus + .focus-input::after {
   left: 23px;
   color: var(--primary-color);
 }
 
-.input100:focus + .focus-input100::before {
-  width: 100%;
+.input:focus + .focus-input::before {
+  width:100%;
 }
 
-.has-val.input100 + .focus-input100::after {
+.has-val.input + .focus-input::after {
   left: 23px;
   color: var(--primary-color);
 }
 
-.has-val.input100 + .focus-input100::before {
-  width: 100%;
+.has-val.input + .focus-input::before {
+  width:100%;
 }
 
-.has-val.input100 {
+.has-val.input {
   padding-left: 60px;
 }
-
-
+.admin-text{
+  color: var(--primary-color);
+  text-align: center;
+}
+.menu-div{
+  text-align: center !important;
+  align-items: center;
+  margin-left:40%;
+  margin-right:40%;
+}
 /*------------------------------------------------------------------
 [ Button ]*/
-.container-login100-form-btn {
-  width: 100%;
+.container-admin-btn {
+  width:100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -355,7 +357,7 @@ iframe {
   justify-content: center;
 }
 
-.login100-form-btn {
+.admin-btn {
   font-family: Ubuntu-Bold, serif;
   font-size: 18px;
   color: var(--secondary-color);
@@ -384,11 +386,11 @@ iframe {
   transition: all 0.4s;
 }
 
-.login100-form-btn::before {
+.admin-btn::before {
   display: block;
   position: absolute;
   z-index: -1;
-  width: 100%;
+  width:100%;
   height: 100%;
   border-radius: 21px;
   background-color: var(--primary-color);
@@ -403,12 +405,12 @@ iframe {
   transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
+.admin-btn:hover {
   background-color: var(--secondary-color);
   color: var(--primary-color);
 }
 
-.login100-form-btn:hover:before {
+.admin-btn:hover:before {
   opacity: 1;
 }
 
@@ -481,170 +483,3 @@ iframe {
     opacity: 1;
   }
 }
-
-/*------------------------------------------------------------------
-[ add e update ]*/
-
-.limiter-add {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.container-add100 {
-  width: 100%;
-  min-height: 100vh;
-
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  z-index: 1;
-}
-
-.container-add100::before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.65);
-}
-
-.wrap-add100 {
-  width: 1500px;
-  border-radius: 10px;
-  overflow: hidden;
-
-  background: transparent;
-}
-
-/*------------------------------------------------------------------
-[ add update form ]*/
-
-.add100-form {
-  width: 100%;
-  border-radius: 15px;
-  background-color: var(--text-color);
-}
-
-.add100-form-logo {
-  font-size: 60px;
-  color: #333333;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: var(--text-color);
-  margin: 0 auto;
-}
-
-.add100-form-title {
-  font-family: Ubuntu-Bold;
-  font-size: 28px;
-  color: var(--primary-color);
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 1%;
-  display: block;
-}
-
-.add100-form-subtitle {
-  font-family: Ubuntu-Bold;
-  font-size: 20px;
-  color: var(--primary-color);
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-  margin-top: 5%;
-  margin-bottom: -15%;
-  display: block;
-}
-
-/*------------------------------------------------------------------
-[ add update button ]*/
-
-.container-add100-form-btn {
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.add100-form-btn {
-  font-family: Ubuntu-Bold, serif;
-  font-size: 18px;
-  color: var(--secondary-color);
-  line-height: 1.2;
-  text-transform: uppercase;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  min-width: 160px;
-  height: 42px;
-  border-radius: 21px;
-
-  background: var(--primary-color);
-  position: relative;
-  z-index: 1;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.add100-form-btn::before {
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  border-radius: 21px;
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  top: 0;
-  left: 0;
-  opacity: 1;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.add100-form-btn:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}
-
-.add100-form-btn:hover:before {
-  opacity: 1;
-}
-
-
-

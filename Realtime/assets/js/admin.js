@@ -69,7 +69,6 @@ onValue(dbRef, (snap) => {
             // stringBuilder += ''
             // stringBuilder += '</script>'
             output1.innerHTML += stringBuilder;
-            console.log(document.getElementById("button_delete_" + i));
             // document.getElementById("button_"+i).addEventListener("click",event =>{
             //     console.log("ristorante");
             //     let restaurantRef = ref(db, "Ristoranti" + "/" + i);
