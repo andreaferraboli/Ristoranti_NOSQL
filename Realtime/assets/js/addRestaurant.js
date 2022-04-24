@@ -1,6 +1,5 @@
 // Your web app's Firebase configuration
-import {getStorage, ref, uploadBytes} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
-import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
+import {getStorage, ref as sRef,  uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {getDatabase,query} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 
 const firebaseConfig = {
@@ -18,18 +17,18 @@ let app=firebase.initializeApp(firebaseConfig);
 var database = getDatabase(app)
 
 document.getElementById("submit").addEventListener('click', () => {
-    var nome = document.getElementById('nome').value
-    var via = document.getElementById('via').value
-    var numero_civico = document.getElementById('numero_civico').value
-    var cap = document.getElementById('cap').value
-    var citta = document.getElementById('citta').value
-    var link = document.getElementById('link').value
-    var maps = document.getElementById('maps').value
-    var recensione = document.getElementById('recensione').value
-    var sito = document.getElementById('sito').value
-    var telefono = document.getElementById('telefono').value
-    var immagine = document.getElementById('immagine').value
-    var file = document.getElementById('fileInput').value
+    var nome = document.getElementById('nome').value;
+    var via = document.getElementById('via').value;
+    var numero_civico = document.getElementById('numero_civico').value;
+    var cap = document.getElementById('cap').value;
+    var citta = document.getElementById('citta').value;
+    var link = document.getElementById('link').value;
+    var maps = document.getElementById('maps').value;
+    var recensione = document.getElementById('recensione').value;
+    var sito = document.getElementById('sito').value;
+    var telefono = document.getElementById('telefono').value;
+    var immagine = document.getElementById('immagine').value;
+    var file = document.getElementById('fileInput').value;
     if (nome == "" || via == "" || numero_civico == "" || cap == "" || citta == "" || link == "" || maps == "" || recensione == "" || sito == "" ||
         telefono == "" || immagine == "") {
         alert("Compila tutti i campi");
@@ -42,22 +41,37 @@ document.getElementById("submit").addEventListener('click', () => {
         "Sito web": sito,
         Telefono: telefono,
         Img: immagine
-    })
-
-    var storageRef =getStorage(app).ref();
-    var thisRef = storageRef.child(file.name);
-    thisRef.put(file).then(function(snapshot) {
-        console.log('Uploaded a blob or file!');
     });
+    // console.log(file);
+    // const storage=getStorage(app);
+    // const storageRef = sRef(storage, "Images/"+file.name);
+    //
+    // const UploadTask=uploadBytesResumable(storageRef, file);
+    //
+    // UploadTask.on('state-changed', (snapshot)=>{
+    //         var progess =
+    //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //         console.log("Upload "+ progess + "%");
+    //     },
+    //     (error) =>{
+    //         alert("error: image not uploaded!");
+    //     });
+
+        // var thisRef = storageRef.child(file.name);
+    // thisRef.put(file).then(function(snapshot) {
+    //     console.log('Uploaded a blob or file!');
+    // });
 
 // 'file' comes from the Blob or File API
-    uploadBytes(storageRef, file).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-    });
+//     uploadBytes(storageRef, file).then((snapshot) => {
+//         console.log('Uploaded a blob or file!');
+//     });
 
     //upload file
     // var upload = storage.put(file);
-    alert('Ristorante aggiunto');
+    console.log('')
+    alert("Ristorante aggiunto correttamente!");
+    window.location.href = '../Realtime/admin.html';
     // load();
 });
 

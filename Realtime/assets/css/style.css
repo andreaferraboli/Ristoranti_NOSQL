@@ -456,15 +456,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
-  color: var(--text-color);
+  color:var(--text-color);
+  background-color: rgba(var(--secondary-color), 0.6);
   font-family: "Poppins", sans-serif;
 }
 #hero h1 span {
   color: var(--primary-color);
 }
 #hero h2 {
-  color: #eee;
+  background-color: rgba(var(--secondary-color), 0.6);
+color: var(--text-color);
   margin-bottom: 10px;
+  font-weight: 700;
   font-size: 22px;
 }
 #hero .btns {

@@ -413,7 +413,18 @@ border: 1px solid #000000;
 .admin-btn:hover:before {
   opacity: 1;
 }
-
+.admin-admin{
+  margin-right: 15%;
+  border: 2px solid var(--primary-color);
+  color: var(--text-color);
+  border-radius: 50px;
+  padding: 8px 25px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
 
 
 /*------------------------------------------------------------------
