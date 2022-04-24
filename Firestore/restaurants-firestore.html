@@ -40,7 +40,7 @@
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
 
-        <h1 class="logo me-auto me-lg-0"><a href="index.html">theFork</a></h1>
+        <h1 class="logo me-auto me-lg-0"><a href="index-firestore.html">theFork</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -116,173 +116,64 @@
                 let collectionRef=collection(firebase, "ristoranti");
                 let docs=await getDocs(query(collectionRef));
 
-                //for(let i=1; i<=y;i++){
                 let i=0;
                 docs.forEach(
                     (doc) =>{
-                    i=parseInt(doc.id);
+                        i=parseInt(doc.id);
 
-                    var Ristorante = doc.data();
-                    console.log(Ristorante);
-                    var Nome = Ristorante.informazioni.nome;
-                    var Img = Ristorante.informazioni.immagine;
-                    console.log(Nome);
-                    console.log(Img);
+                        var Ristorante = doc.data();
+                        console.log(Ristorante);
+                        var Nome = Ristorante.informazioni.nome;
+                        var Img = Ristorante.informazioni.immagine;
+                        var Valutazione = Ristorante.informazioni.valutazione;
+                        var Via = Ristorante.posizione.via;
+                        var N_civico = Ristorante.posizione.n_civico;
+                        var CAP = Ristorante.posizione.CAP;
+                        var Città = Ristorante.posizione.città;
+                        var Telefono = Ristorante.contatti.telefono;
+                        var Sito_web = Ristorante.contatti.link;
+                        var Mappa = Ristorante.contatti.mappa;
+                        console.log(Nome);
+                        console.log(Img);
 
-                            // var stringBuilder = '<section class="restaurant-section section-bg">';
-                            // stringBuilder += '<div class="card" >'
-                            // stringBuilder += '<div class="row no-gutters">'
-                            // stringBuilder += '<div class="col-sm-5 cardImg">'
-                            // stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '<div class="col-sm-7 card-div">'
-                            // stringBuilder += '<div class="card-body">'
-                            // stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-                            // stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
-                            // stringBuilder += '<div class="card-item">'
-                            // stringBuilder += '<div class="col-sm-6">'
-                            // stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '<div class="col-sm-6">'
-                            // stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '<div class="card-item">'
-                            // stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
-                            // stringBuilder += '<a href="php/' + obj[i]["Nome"] + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-                            // stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
-                            // stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '</div>'
-                            // stringBuilder += '</section>'
-                            // output1.innerHTML += stringBuilder;
+                        var stringBuilder = '<section class="restaurant-section section-bg">';
+                        stringBuilder += '<div class="card" >'
+                        stringBuilder += '<div class="row no-gutters">'
+                        stringBuilder += '<div class="col-sm-5 cardImg">'
+                        stringBuilder += '<img class="Img" src="' + Img + '" alt="Suresh Dasari Card">'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="col-sm-7 card-div">'
+                        stringBuilder += '<div class="card-body">'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + Nome + '</h5></div>'
+                        stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + Valutazione + '<span class="star" >&starf;</span></p></div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<div class="card-item"><h5 class="card-title">' + Via + "," + N_civico + "," + CAP + ", " + Città + '</h5></div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="col-sm-6">'
+                        stringBuilder += '<iframe src="' + Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '<div class="card-item">'
+                        stringBuilder += '<a href="' + Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
+                        stringBuilder += '<a href="php/' + Nome + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
+                        stringBuilder += '<a href="' + Mappa + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                        stringBuilder += '<a href="tel:' + Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</div>'
+                        stringBuilder += '</section>'
+
+
+                        document.write(stringBuilder);
 
 
 
-                });
+                    });
             </script>
-
         </div>
     </section>
-    <!-- ======= Menu Section ======= -->
-    <!--    <section id="menu" class="menu section-bg">-->
-    <!--        <div class="container" data-aos="fade-up">-->
-
-    <!--            <div class="section-title">-->
-    <!--                <h2>Menu</h2>-->
-    <!--                <p>Check Our Tasty Menu</p>-->
-    <!--            </div>-->
-
-    <!--            <div class="row" data-aos="fade-up" data-aos-delay="100">-->
-    <!--                <div class="col-lg-12 d-flex justify-content-center">-->
-    <!--                    <ul id="menu-flters">-->
-    <!--                        <li data-filter="*" class="filter-active">All</li>-->
-    <!--                        <li data-filter=".filter-starters">Starters</li>-->
-    <!--                        <li data-filter=".filter-salads">Salads</li>-->
-    <!--                        <li data-filter=".filter-specialty">Specialty</li>-->
-    <!--                    </ul>-->
-    <!--                </div>-->
-    <!--            </div>-->
-
-    <!--            <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">-->
-
-    <!--                <div class="col-lg-6 menu-item filter-starters">-->
-    <!--                    <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Lobster Bisque</a><span>$5.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Lorem, deren, trataro, filede, nerada-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-specialty">-->
-    <!--                    <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Bread Barrel</a><span>$6.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Lorem, deren, trataro, filede, nerada-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-starters">-->
-    <!--                    <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Crab Cake</a><span>$7.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        A delicate crab cake served on a toasted roll with lettuce and tartar sauce-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-salads">-->
-    <!--                    <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Caesar Selections</a><span>$8.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Lorem, deren, trataro, filede, nerada-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-specialty">-->
-    <!--                    <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Tuscan Grilled</a><span>$9.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Grilled chicken with provolone, artichoke hearts, and roasted red pesto-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-starters">-->
-    <!--                    <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Mozzarella Stick</a><span>$4.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Lorem, deren, trataro, filede, nerada-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-salads">-->
-    <!--                    <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Greek Salad</a><span>$9.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Fresh spinach, crisp romaine, tomatoes, and Greek olives-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-salads">-->
-    <!--                    <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Spinach Salad</a><span>$9.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--                <div class="col-lg-6 menu-item filter-specialty">-->
-    <!--                    <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">-->
-    <!--                    <div class="menu-content">-->
-    <!--                        <a href="#">Lobster Roll</a><span>$12.95</span>-->
-    <!--                    </div>-->
-    <!--                    <div class="menu-ingredients">-->
-    <!--                        Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll-->
-    <!--                    </div>-->
-    <!--                </div>-->
-
-    <!--            </div>-->
-
-    <!--        </div>-->
-    <!--    </section>-->
-    <!-- End Menu Section -->
 
 
     <!-- ======= Contact Section ======= -->
@@ -441,3 +332,16 @@
 </body>
 
 </html>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
