@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <title>ADD RESTAURANT</title>
+    <script src="assets-firestore-firestore/js/addRestaurant.js" type="module"></script>
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!--===============================================================================================-->
+    <link href="assets-firestore/img/favicon.png" rel="icon" type="image/png"/>
+    <!--===============================================================================================-->
+    <link href="vendor-firestore-firestore/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="fonts-firestore-firestore/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="fonts-firestore/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="vendor-firestore/animate/animate.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="vendor-firestore/css-hamburgers/hamburgers.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="vendor-firestore/animsition/css/animsition.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="vendor-firestore/select2/select2.min.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <link href="vendor-firestore/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
+    <!--===============================================================================================-->
+    <!-- Google fonts-firestore -->
+    <link href="https://fonts-firestore.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <link href="assets-firestore/css/util.css" rel="stylesheet" type="text/css">
+    <link href="assets-firestore/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="assets-firestore/css/style.css" rel="stylesheet">
+
+    <!--===============================================================================================-->
+</head>
+<body>
+<header class="fixed-top d-flex align-items-center " id="header">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between p-l-150">
+        <h1 class="logo me-auto "><a class="logo me-auto me-lg-0" href="index-firestore.html"><img alt=""
+                                                                                         class="img-fluid"
+                                                                                         src="assets-firestore/img/favicon.png"></a><a
+                class="logo" href="index-firestore.html">theFork</a></h1>
+        <a href="admin-firestore.html" class=" scrollto d-none d-lg-flex admin-admin">ADMIN</a>
+    </div>
+
+</header>
+<div class="limiter">
+    <div class="container-login" style="background-image: url('assets-firestore/img/hero-bg.jpg');">
+        <div class="wrap-login p-t-30 p-b-50">
+            <div class="admin validate-form p-b-33 p-t-5">
+            <span class="admin-title p-b-41">
+					ADD RESTAURANT
+				</span>
+                <div class="row no-gutters">
+                    <div class="wrap-input validate-input col-4">
+                        <input class="input" id="nome" placeholder="Inserisci nome" required type="text"/>
+                    </div>
+                    <div class="wrap-input validate-input col-4">
+                        <input class="input" id="recensione" placeholder="Inserisci la recensione" type="name"/>
+                    </div>
+                    <div class="wrap-input validate-input col-4">
+                        <input class="input" id="telefono" placeholder="Inserisci numero di telefono" type="text"/>
+                    </div>
+                </div>
+                <div class="wrap-input validate-input">
+                    <input class="input" id="immagine" placeholder="Inserisci immagine" type="text"/>
+                </div>
+
+                <h1 class="admin-subtitle">Posizione:</h1>
+                <div class="row no-gutters">
+                    <div class="wrap-input validate-input col-4">
+                        <input class="input" id="via" placeholder="Inserisci via" type="text"/>
+                    </div>
+
+                    <div class="wrap-input validate-input col-2">
+                        <input class="input" id="numero_civico" placeholder="Inserisci numero civico" type="text"/>
+                    </div>
+
+                    <div class="wrap-input validate-input col-3">
+                        <input class="input" id="cap" placeholder="Inserisci cap" type="text"/>
+                    </div>
+
+                    <div class="wrap-input validate-input col-3">
+                        <input class="input" id="citta" placeholder="Inserisci città" type="text"/>
+                    </div>
+                </div>
+                <div class="wrap-input validate-input">
+                    <input class="input" id="link" placeholder="Inserisci link" type="text"/>
+                </div>
+
+                <div class="wrap-input validate-input">
+                    <input class="input" id="maps" placeholder="Inserisci maps" type="text"/>
+                </div>
+
+
+                <div class="wrap-input validate-input">
+                    <input class="input" id="sito" placeholder="Inserisci il sito" type="text"/>
+                </div>
+                <h1 class="admin-subtitle">Menù:</h1>
+                <div class="row no-gutters menu-div">
+                    <label class="admin-text" for="fileInput">carica il menù in formato pdf:</label>
+                    <input class="admin-text" type="file"
+                           id="fileInput" name="fileInput"
+                           accept=".pdf">
+                </div>
+                <div class="container-admin-btn m-t-32">
+                    <button class="admin-btn" id="submit"> SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<div id="dropDownSelect1"></div>
+<!--===============================================================================================-->
+<script src="vendor-firestore/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor-firestore/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor-firestore/bootstrap/js/popper.js"></script>
+<script src="vendor-firestore/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor-firestore/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor-firestore/daterangepicker/moment.min.js"></script>
+<script src="vendor-firestore/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor-firestore/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+</html>
