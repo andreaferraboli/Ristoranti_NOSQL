@@ -28,6 +28,7 @@
           rel="stylesheet">
     <link href="assets/css/util.css" rel="stylesheet" type="text/css">
     <link href="assets/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/restaurant.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet">
 
     <!--===============================================================================================-->
@@ -96,13 +97,18 @@
                     <input class="input" id="sito" placeholder="Inserisci il sito" type="text"/>
                 </div>
                 <h1 class="admin-subtitle">Menù:</h1>
-                <div class="row no-gutters menu-div">
-                    <label class="admin-text" for="fileInput">carica il menù in formato pdf:</label>
-                    <input class="admin-text" type="file"
-                           id="fileInput" name="fileInput"
-                           accept=".pdf">
+                <div class="row menu-div">
+                    <div class="col-lg-6">
+                        <label class="admin-text" for="fileInput">carica il menù in formato pdf:</label>
+                        <input class="admin-text" type="file"
+                               id="fileInput" name="fileInput"
+                               accept=".pdf">
+                    </div>
+                    <div class="col-lg-6 ">
+                        <label class="admin-text" for="fileInput">apri il menù in formato pdf:</label>
+                        <a class="btn-restaurant" target="_blank" id="menuFile" href="">menù</a>
+                    </div>
                 </div>
-
                 <div class="container-admin-btn m-t-32">
                     <button class="admin-btn" id="update">Update</button>
                 </div>

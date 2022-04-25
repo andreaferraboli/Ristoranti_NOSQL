@@ -1,6 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, query, ref, remove} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-// import {currentId} from "./updateRestaurant.js";
+import {deleteObject, getStorage,ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 
 
 
@@ -22,12 +22,9 @@ const db = getDatabase(app);
 console.log(db);
 // recupera e stampa valore della chiave 'testo'
 const output1 = document.getElementById("restaurants");
-// var dbRef = ref(db, "/Ristoranti/");
 let dbRef = query(ref(db, '/Ristoranti/'));
 onValue(dbRef, (snap) => {
     const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
-    console.log(obj);
-    console.log(Object.keys(obj));
     for (const i of Object.keys(obj)) {
         if (obj[i] != null) {
             let stringBuilder = '<section class="restaurant-section section-bg">';
@@ -56,50 +53,30 @@ onValue(dbRef, (snap) => {
             stringBuilder += '</div>'
             stringBuilder += '</div>'
             stringBuilder += '</section>'
-            // stringBuilder += '<script>'
-            // stringBuilder += 'function eliminaRistorante(event) {'
-            // stringBuilder += ' event.stopPropagation();'
-            // stringBuilder += ' event.target.id'
-            // stringBuilder += '            alert("elimina: " + id);'
-            // stringBuilder += '            let restaurantRef = ref(db, "Ristoranti" + "/" + "0");'
-            //
-            // // remove review
-            // stringBuilder += '            remove(restaurantRef);'
-            // stringBuilder += '        }'
-            // stringBuilder += ''
-            // stringBuilder += '</script>'
             output1.innerHTML += stringBuilder;
-            // document.getElementById("button_"+i).addEventListener("click",event =>{
-            //     console.log("ristorante");
-            //     let restaurantRef = ref(db, "Ristoranti" + "/" + i);
-            //     // remove review
-            //     remove(restaurantRef);
-            //     alert("ristorante eliminato")
-            // })
-            document.addEventListener('click', function (e) {
+            document.addEventListener('click', async function (e) {
                 if (e.target && e.target.id === 'button_delete_' + i) {
                     let restaurantRef = ref(db, "Ristoranti" + "/" + i);
                     // remove review
                     remove(restaurantRef);
+
+                    const storage = getStorage(app);
+                    const desertRef = refS(storage, 'Files/' + i+"/Menu");
+                    await deleteObject(desertRef).then(() => {
+                        console.log("file eliminato");
+                    }).catch((error) => {
+                        alert("file non eliminati");
+                        return false;
+                    });
                     alert("ristorante eliminato")
                     window.location.href = './admin.html';
                 }
                 if (e.target && e.target.id === 'button_modify_' + i) {
-                     localStorage.setItem('currentId',i);
-                     window.location.href = './updateRestaurant.html';
+                    localStorage.setItem('currentId', i);
+                    window.location.href = './updateRestaurant.html';
 
-                    }
+                }
             });
         }
     }
 });
-
-
-
-function modificaRistorante(id) {
-    alert("elimina: " + id);
-    let restaurantRef = ref(this.db, "Ristoranti" + "/" + id);
-
-    // remove review
-    remove(restaurantRef);
-}
