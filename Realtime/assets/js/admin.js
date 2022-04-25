@@ -31,7 +31,7 @@ onValue(dbRef, (snap) => {
             stringBuilder += '<div class="card" >'
             stringBuilder += '<div class="row no-gutters">'
             stringBuilder += '<div class="col-sm-5 cardImg">'
-            stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="Suresh Dasari Card">'
+            stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="">'
             stringBuilder += '</div>'
             stringBuilder += '<div class="col-sm-7 card-div">'
             stringBuilder += '<div class="card-body">'
