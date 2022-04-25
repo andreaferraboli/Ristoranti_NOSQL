@@ -337,12 +337,11 @@ border: 1px solid #000000;
 .admin-text{
   color: var(--primary-color);
   text-align: center;
+  margin-bottom:1.5rem !important;
 }
 .menu-div{
   text-align: center !important;
   align-items: center;
-  margin-left:40%;
-  margin-right:40%;
 }
 /*------------------------------------------------------------------
 [ Button ]*/
