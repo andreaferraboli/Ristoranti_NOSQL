@@ -103,7 +103,7 @@
 
             <script type="module">
 
-                import { doc, getDoc, getDocs, collection, query } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+                import { getDocs, collection, query } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
                 console.log(firebase);
 
@@ -127,8 +127,7 @@
                         var Telefono = Ristorante.contatti.telefono;
                         var Sito_web = Ristorante.contatti.link;
                         var Mappa = Ristorante.posizione.mappa;
-                        console.log(Nome);
-                        console.log(Img);
+                        var Link = Ristorante.posizione.link;
 
                         var stringBuilder = '<section class="restaurant-section section-bg">';
                         stringBuilder += '<div class="card" >'
@@ -151,7 +150,7 @@
                         stringBuilder += '<div class="card-item">'
                         stringBuilder += '<a href="' + Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
                         stringBuilder += '<a href="php/' + Nome + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-                        stringBuilder += '<a href="' + Mappa + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                        stringBuilder += '<a href="' + Link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
                         stringBuilder += '<a href="tel:' + Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
                         stringBuilder += '</div>'
                         stringBuilder += '</div>'

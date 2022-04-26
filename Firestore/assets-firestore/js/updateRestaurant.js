@@ -1,49 +1,71 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
-    authDomain: "ristoranti-31ef8.firebaseapp.com",
-    projectId: "ristoranti-31ef8",
-    storageBucket: "ristoranti-31ef8.appspot.com",
-    messagingSenderId: "236248778413",
-    appId: "1:236248778413:web:0b004e239a04c74793a824",
-    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
-};
-firebase.initializeApp(firebaseConfig);
-let currentId=localStorage.getItem('currentId');
-console.log("currentId:"+currentId);
-let nome=document.getElementById('nome');
-let via=document.getElementById('via');
-let numero_civico=document.getElementById('numero_civico');
-let cap=document.getElementById('cap');
-let citta=document.getElementById('citta');
-let link=document.getElementById('link');
-let maps=document.getElementById('maps');
-let recensione=document.getElementById('recensione');
-let sito=document.getElementById('sito');
-let telefono=document.getElementById('telefono');
-let immagine=document.getElementById('immagine');
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
+import {collection, doc, getFirestore, query, getDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
-firebase.database().ref('Ristoranti/' + currentId).on('value', function (snapshot) {
-    nome.value = snapshot.val().Nome;
-    via.value = snapshot.val().Posizione.via;
-    numero_civico.value = snapshot.val().Posizione.numero_civico;
-    cap.value = snapshot.val().Posizione.cap;
-    citta.value = snapshot.val().Posizione.città;
-    link.value = snapshot.val().Posizione.link;
-    maps.value = snapshot.val().Posizione.mappa;
-    recensione.value = snapshot.val().Recensione;
-    sito.value = snapshot.val()["Sito web"];
-    telefono.value = snapshot.val().Telefono;
-    immagine.value = snapshot.val().Img;
-})
-document.getElementById('update').onclick = function () {
-    firebase.database().ref('Ristoranti/'+currentId).update({
-        Nome: nome.value,
-        Posizione: {via: via.value, numero_civico: numero_civico.value, città: citta.value, cap: cap.value, link: link.value, mappa: maps.value},
-        Recensione: recensione.value,
-        "Sito web": sito.value,
-        Telefono: telefono.value,
-        Img: immagine.value
-    });
-    alert("DATI AGGIORNATI");
-    window.location.href = '../Realtime/admin.html';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC6_tMUB9BKh9Fi_WoYZYjCT9Xlgf8q5CY",
+    authDomain: "ristorantilombardi.firebaseapp.com",
+    projectId: "ristorantilombardi",
+    storageBucket: "ristorantilombardi.appspot.com",
+    messagingSenderId: "476667917046",
+    appId: "1:476667917046:web:8d01a4cd11f6b59b9432d7",
+    measurementId: "G-2YMQP9WKN0"
+};
+
+const app = initializeApp(firebaseConfig);
+self.firebase = getFirestore(app);
+
+
+console.log(firebase);
+console.log(localStorage.getItem("currentId"));
+
+// let collectionRef = collection(firebase, "ristoranti/" + localStorage.getItem("currentId"));
+// let docs = await getDoc(query(collectionRef));
+const docRef = collection('Ristoranti/' + localStorage.getItem("currentId")).get()
+const docSnap = await getDoc(docRef);
+if (docSnap.exists()) {
+    console.log("ciao");
+
+    var Ristorante = docSnap.data();
+    console.log(Ristorante);
+    document.getElementById("nome").value  = Ristorante.informazioni.nome;
+    document.getElementById("immagine").value  = Ristorante.informazioni.immagine;
+    document.getElementById("recensione").value = Ristorante.informazioni.valutazione;
+    document.getElementById("via").value = Ristorante.posizione.via;
+    document.getElementById("numero_civico").value  = Ristorante.posizione.n_civico;
+    document.getElementById("cap").value  = Ristorante.posizione.CAP;
+    document.getElementById("citta").value = Ristorante.posizione.città;
+    document.getElementById("telefono").value  = Ristorante.contatti.telefono;
+    document.getElementById("sito").value  = Ristorante.contatti.link;
+    document.getElementById("maps").value = Ristorante.posizione.mappa;
+    document.getElementById("link").value  = Ristorante.posizione.link;
+    document.getElementById('update').onclick = function () {
+        firebase.database().ref('Ristoranti/' + i).update({
+            Nome: Nome.value,
+            Posizione: {
+                Via: Via.value,
+                N_civico: N_civico.value,
+                Città: Città.value,
+                CAP: CAP.value,
+                Link: Link.value,
+                Mappa: Mappa.value
+            },
+            Valutazione: Valutazione.value,
+            "Sito_web": Sito_web.value,
+            Telefono: Telefono.value,
+            Img: Img.value
+        });
+        alert("DATI AGGIORNATI");
+        window.location.href = '../Firestore/admin-firestore.html';
+
+    }
+} else {   // doc.data() will be undefined in this case   console.log("No such document!"); }
+
+
+    // i = parseInt(doc.id);
+    // console.log(i);
+    console.log("localstorage:" + localStorage.getItem("currentId"));
+
+
+
 }
