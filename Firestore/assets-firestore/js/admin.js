@@ -1,11 +1,11 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {
     collection,
+    deleteDoc,
     getDocs,
     getFirestore,
-    query,
     doc,
-    deleteDoc
+    query
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -30,10 +30,10 @@ let collectionRef = collection(firebase, "ristoranti");
 let docs = await getDocs(query(collectionRef));
 
 docs.forEach(
-    (doc) => {
-        let i = parseInt(doc.id);
+    (pick) => {
+        let i = parseInt(pick.id);
 
-        var Ristorante = doc.data();
+        var Ristorante = pick.data();
         console.log(Ristorante);
         var Nome = Ristorante.informazioni.nome;
         var Img = Ristorante.informazioni.immagine;
@@ -73,23 +73,16 @@ docs.forEach(
 
 
         document.getElementById("ristorante").innerHTML += stringBuilder;
-
         document.addEventListener('click', async function (e) {
             if (e.target && e.target.id === 'button_delete_' + i) {
-                await firebase_tools.firestore
-                    .delete("Ristoranti/"+i, {
-                        project: process.env.GCLOUD_PROJECT,
-                        recursive: true,
-                        yes: true,
-                        token: functions.config().fb.token
-                    });
+                await deleteDoc(doc(firebase, "ristoranti", pick.id));
 
-                alert("ristorante eliminato")
+                alert("ristorante eliminato");
                 window.location.href = './admin-firestore.html';
             }
             if (e.target && e.target.id === 'button_modify_' + i) {
-                localStorage.setItem('currentId', i);
+                localStorage.setItem('currentId', pick.id);
                 window.location.href = './updateRestaurant-firestore.html';
             }
+        });
     });
-});

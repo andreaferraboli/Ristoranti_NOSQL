@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-import {collection, doc, getFirestore, query, getDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+import {collection, doc, getFirestore, query, getDoc, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -19,11 +19,9 @@ self.firebase = getFirestore(app);
 console.log(self.firebase);
 console.log(localStorage.getItem("currentId"));
 
-// let collectionRef = collection(firebase, "ristoranti/" + localStorage.getItem("currentId"));
-// let docs = await getDoc(query(collectionRef));
-const docRef = doc(self.firebase,"ristoranti/" + localStorage.getItem("currentId"));
+const docRef = doc(self.firebase,"ristoranti", localStorage.getItem("currentId"));
 const Restaurant = (await getDoc(docRef)).data();
-    console.log("Sugoma sus");
+
 if (Restaurant!==undefined) {
 
     var Ristorante = Restaurant;
@@ -39,21 +37,23 @@ if (Restaurant!==undefined) {
     document.getElementById("sito").value  = Ristorante.contatti.link;
     document.getElementById("maps").value = Ristorante.posizione.mappa;
     document.getElementById("link").value  = Ristorante.posizione.link;
-    document.getElementById('update').onclick = function () {
-        firebase.database().ref('Ristoranti/' + i).update({
-            Nome: Nome.value,
+    document.getElementById('update').onclick = async function () {
+        console.log(document.getElementById("recensione").value);
+        
+        await updateDoc(doc(self.firebase, 'ristoranti', localStorage.getItem("currentId")), {
+            Nome:  document.getElementById("nome").value,
             Posizione: {
-                Via: Via.value,
-                N_civico: N_civico.value,
-                Città: Città.value,
-                CAP: CAP.value,
-                Link: Link.value,
-                Mappa: Mappa.value
+                Via: document.getElementById("via").value,
+                N_civico: document.getElementById("numero_civico").value,
+                Città: document.getElementById("citta").value,
+               CAP: document.getElementById("cap").value,
+                Link: document.getElementById("link").value,
+                Mappa: document.getElementById("maps").value
             },
-            Valutazione: Valutazione.value,
-            "Sito_web": Sito_web.value,
-            Telefono: Telefono.value,
-            Img: Img.value
+            Valutazione: document.getElementById("recensione").value,
+            Sito_web: document.getElementById("sito").value,
+            Telefono: document.getElementById("telefono").value,
+            Img: document.getElementById("immagine").value
         });
         alert("DATI AGGIORNATI");
         window.location.href = '../Firestore/admin-firestore.html';
