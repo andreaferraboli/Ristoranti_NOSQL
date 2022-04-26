@@ -1,10 +1,12 @@
 // Your web app's Firebase configuration
 export const firebaseConfig = {
-    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
-    authDomain: "ristoranti-31ef8.firebaseapp.com",
-    projectId: "ristoranti-31ef8",
-    storageBucket: "ristoranti-31ef8.appspot.com",
-    messagingSenderId: "236248778413",
-    appId: "1:236248778413:web:0b004e239a04c74793a824",
-    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
+    apiKey: "AIzaSyC6_tMUB9BKh9Fi_WoYZYjCT9Xlgf8q5CY",
+    authDomain: "ristorantilombardi.firebaseapp.com",
+    projectId: "ristorantilombardi",
+    storageBucket: "ristorantilombardi.appspot.com",
+    messagingSenderId: "476667917046",
+    appId: "1:476667917046:web:8d01a4cd11f6b59b9432d7",
+    measurementId: "G-2YMQP9WKN0",
+    databaseURL: "https://ristorantilombardi-default-rtdb.firebaseio.com/",
 };
+export const type_database="Realtime";

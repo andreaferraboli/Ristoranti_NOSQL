@@ -1,18 +1,10 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, query, ref, remove} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {deleteObject, getStorage,ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
+import {firebaseConfig,type_database} from "./firebaseConfig.js";
 
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
-    authDomain: "ristoranti-31ef8.firebaseapp.com",
-    projectId: "ristoranti-31ef8",
-    storageBucket: "ristoranti-31ef8.appspot.com",
-    messagingSenderId: "236248778413",
-    appId: "1:236248778413:web:0b004e239a04c74793a824",
-    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
-};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -61,7 +53,7 @@ onValue(dbRef, (snap) => {
                     remove(restaurantRef);
 
                     const storage = getStorage(app);
-                    const desertRef = refS(storage, 'Files/' + i+"/Menu");
+                    const desertRef = refS(storage, type_database+'/' + i+"/Menu");
                     await deleteObject(desertRef).then(() => {
                         console.log("file eliminato");
                     }).catch((error) => {

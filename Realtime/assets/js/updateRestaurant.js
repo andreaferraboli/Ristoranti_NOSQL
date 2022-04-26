@@ -7,11 +7,7 @@ import {
     getBytes,
     listAll, getDownloadURL, ref as sRef, uploadBytes
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
-import {firebaseConfig} from "./firebaseConfig.js";
-
-// import { getStorage, ref,uploadBytes } from "https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {firebaseConfig,type_database} from "./firebaseConfig.js";
 
 
 // Initialize Firebase
@@ -59,7 +55,7 @@ onValue(dbRef, (snapshot)=> {
 async function downloadFile() {
 
     // get file reference
-    let storageRef = refS(storage, 'Files/' + currentId);
+    let storageRef = refS(storage, type_database+'/' + currentId);
     let fileRef = (await listAll(storageRef)).items[0];
 
     // get download url and name of the file
@@ -92,7 +88,7 @@ document.getElementById('update').onclick = async function () {
     {
         console.log("file selezionato");
         var file = document.getElementById('fileInput').files[0];
-        const storageRef = sRef(storage, "Files/" + currentId + "/" + "Menu");
+        const storageRef = sRef(storage, type_database+"/" + currentId + "/" + "Menu");
         await uploadBytes(storageRef, file);
     }
     alert("DATI AGGIORNATI");

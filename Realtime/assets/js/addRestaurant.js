@@ -1,7 +1,7 @@
 import {getStorage,ref as sRef,uploadBytes,} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {getDatabase, push, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-import {firebaseConfig} from "./firebaseConfig.js";
+import {firebaseConfig,type_database} from "./firebaseConfig.js";
 
 
 // Initialize Firebase
@@ -44,7 +44,7 @@ document.getElementById("submit").addEventListener('click', async () => {
 
     console.log(file);
     const storage = getStorage(app);
-    const storageRef = sRef(storage, "Files/" + id + "/" + "Menu");
+    const storageRef = sRef(storage, type_database+"/" + id + "/" + "Menu");
 
     await uploadBytes(storageRef, file);
 

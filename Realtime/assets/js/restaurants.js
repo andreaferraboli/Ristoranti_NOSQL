@@ -4,7 +4,7 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-import {firebaseConfig} from "./firebaseConfig.js";
+import {firebaseConfig,type_database} from "./firebaseConfig.js";
 import {getDownloadURL,getStorage,listAll,ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 
 // Initialize Firebase
@@ -22,7 +22,7 @@ onValue(dbRef, async (snap) => {
 
     const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
     for (const i of Object.keys(obj)) {
-        let storageRef = refS(storage, 'Files/' + i);
+        let storageRef = refS(storage, type_database+'/' + i);
         let fileRef = (await listAll(storageRef)).items[0];
         let menuLink;
         getDownloadURL(fileRef).then(function (url) {
