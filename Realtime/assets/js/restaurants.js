@@ -6,56 +6,117 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-a
 import {getDatabase, onValue, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {firebaseConfig,type_database} from "./firebaseConfig.js";
 import {getDownloadURL,getStorage,listAll,ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
+import {getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+import { getDocs, collection, query } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // get realtyme databse reference
 // self. to let firebase be global from other modules
 self.db = getDatabase(app);
+self.firebase = getFirestore(app);
 const storage = getStorage(app);
-console.log(self.db);
+if(type_database === "Realtime"){
+    const output1 = document.getElementById("restaurants");
+    let dbRef = ref(self.db, "/Ristoranti/");
 
-const output1 = document.getElementById("restaurants");
-let dbRef = ref(self.db, "/Ristoranti/");
+    onValue(dbRef, async (snap) => {
 
-onValue(dbRef, async (snap) => {
+        const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
+        for (const i of Object.keys(obj)) {
+            let storageRef = refS(storage, type_database+'/' + i);
+            let fileRef = (await listAll(storageRef)).items[0];
+            let menuLink;
+            getDownloadURL(fileRef).then(function (url) {
+                menuLink = url.valueOf();
+                var stringBuilder = '<section class="restaurant-section section-bg">';
+                stringBuilder += '<div class="card" >'
+                stringBuilder += '<div class="row no-gutters">'
+                stringBuilder += '<div class="col-sm-5 cardImg">'
+                stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="">'
+                stringBuilder += '</div>'
+                stringBuilder += '<div class="col-sm-7 card-div">'
+                stringBuilder += '<div class="card-body">'
+                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
+                stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
+                stringBuilder += '<div class="card-item">'
+                stringBuilder += '<div class="col-sm-6">'
+                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+                stringBuilder += '</div>'
+                stringBuilder += '<div class="col-sm-6">'
+                stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                stringBuilder += '</div>'
+                stringBuilder += '</div>'
+                stringBuilder += '<div class="card-item">'
+                stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
+                stringBuilder += '<a href="' + menuLink + '" download="menù" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù" id="menu"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
+                stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
+                stringBuilder += '</div>'
+                stringBuilder += '</div>'
+                stringBuilder += '</div>'
+                stringBuilder += '</div>'
+                stringBuilder += '</section>'
+                output1.innerHTML += stringBuilder;
+            });
+        }
+    });
+}else{
 
-    const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
-    for (const i of Object.keys(obj)) {
-        let storageRef = refS(storage, type_database+'/' + i);
-        let fileRef = (await listAll(storageRef)).items[0];
-        let menuLink;
-        getDownloadURL(fileRef).then(function (url) {
-            menuLink = url.valueOf();
+
+    let collectionRef=collection(firebase, "ristoranti");
+    let docs=await getDocs(query(collectionRef));
+
+    let i=0;
+    docs.forEach(
+        (doc) =>{
+            i=parseInt(doc.id);
+
+            var Ristorante = doc.data();
+            console.log(Ristorante);
+            var Nome = Ristorante.informazioni.nome;
+            var Img = Ristorante.informazioni.immagine;
+            var Valutazione = Ristorante.Valutazione;
+            var Via = Ristorante.posizione.via;
+            var N_civico = Ristorante.posizione.n_civico;
+            var CAP = Ristorante.posizione.CAP;
+            var Città = Ristorante.posizione.città;
+            var Telefono = Ristorante.contatti.telefono;
+            var Sito_web = Ristorante.contatti.link;
+            var Mappa = Ristorante.posizione.mappa;
+            var Link = Ristorante.posizione.link;
+
             var stringBuilder = '<section class="restaurant-section section-bg">';
             stringBuilder += '<div class="card" >'
             stringBuilder += '<div class="row no-gutters">'
             stringBuilder += '<div class="col-sm-5 cardImg">'
-            stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="">'
+            stringBuilder += '<img class="Img" src="' + Img + '" alt="Suresh Dasari Card">'
             stringBuilder += '</div>'
             stringBuilder += '<div class="col-sm-7 card-div">'
             stringBuilder += '<div class="card-body">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-            stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
+            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Nome + '</h5></div>'
+            stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + Valutazione + '<span class="star" >&starf;</span></p></div>'
             stringBuilder += '<div class="card-item">'
             stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Via + "," + N_civico + "," + CAP + ", " + Città + '</h5></div>'
             stringBuilder += '</div>'
             stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+            stringBuilder += '<iframe src="' + Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
             stringBuilder += '</div>'
             stringBuilder += '</div>'
             stringBuilder += '<div class="card-item">'
-            stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
-            stringBuilder += '<a href="' + menuLink + '" download="menù" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù" id="menu"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-            stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
-            stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
+            stringBuilder += '<a href="' + Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
+            stringBuilder += '<a href="php/' + Nome + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
+            stringBuilder += '<a href="' + Link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+            stringBuilder += '<a href="tel:' + Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
             stringBuilder += '</div>'
             stringBuilder += '</div>'
             stringBuilder += '</div>'
             stringBuilder += '</div>'
             stringBuilder += '</section>'
-            output1.innerHTML += stringBuilder;
+
+
+            document.getElementById("restaurants").innerHTML += stringBuilder;
         });
-    }
-});
+}

@@ -9,4 +9,4 @@ export const firebaseConfig = {
     measurementId: "G-2YMQP9WKN0",
     databaseURL: "https://ristorantilombardi-default-rtdb.firebaseio.com/",
 };
-export const type_database="Realtime";
+export const type_database="Firestore";
