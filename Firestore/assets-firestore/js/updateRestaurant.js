@@ -16,17 +16,17 @@ const app = initializeApp(firebaseConfig);
 self.firebase = getFirestore(app);
 
 
-console.log(firebase);
+console.log(self.firebase);
 console.log(localStorage.getItem("currentId"));
 
 // let collectionRef = collection(firebase, "ristoranti/" + localStorage.getItem("currentId"));
 // let docs = await getDoc(query(collectionRef));
-const docRef = collection('Ristoranti/' + localStorage.getItem("currentId")).get()
-const docSnap = await getDoc(docRef);
-if (docSnap.exists()) {
-    console.log("ciao");
+const docRef = doc(self.firebase,"ristoranti/" + localStorage.getItem("currentId"));
+const Restaurant = (await getDoc(docRef)).data();
+    console.log("Sugoma sus");
+if (Restaurant!==undefined) {
 
-    var Ristorante = docSnap.data();
+    var Ristorante = Restaurant;
     console.log(Ristorante);
     document.getElementById("nome").value  = Ristorante.informazioni.nome;
     document.getElementById("immagine").value  = Ristorante.informazioni.immagine;
@@ -60,10 +60,6 @@ if (docSnap.exists()) {
 
     }
 } else {   // doc.data() will be undefined in this case   console.log("No such document!"); }
-
-
-    // i = parseInt(doc.id);
-    // console.log(i);
     console.log("localstorage:" + localStorage.getItem("currentId"));
 
 
