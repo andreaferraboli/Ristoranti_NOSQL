@@ -54,8 +54,6 @@ if (type_database === "Realtime") {
                 Venerdi = obj[i].Orari.Venerdi;
                 Sabato = obj[i].Orari.Sabato;
                 Domenica = obj[i].Orari.Domenica;
-
-
                 menuLink = url.valueOf();
                 sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
             <div class="row no-gutters">

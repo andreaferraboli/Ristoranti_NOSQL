@@ -35,6 +35,13 @@ if(type_database==="Realtime"){
     let sito = document.getElementById('sito');
     let telefono = document.getElementById('telefono');
     let immagine = document.getElementById('immagine');
+    let lunedi = document.getElementById('lunedi');
+    let martedi = document.getElementById('martedi');
+    let mercoledi = document.getElementById('mercoledi');
+    let giovedi = document.getElementById('giovedi');
+    let venerdi = document.getElementById('venerdi');
+    let sabato = document.getElementById('sabato');
+    let domenica = document.getElementById('domenica');
     let fileInput = document.getElementById('fileInput');
 
 
@@ -52,6 +59,13 @@ if(type_database==="Realtime"){
         sito.value = snapshot.val().Sito_web;
         telefono.value = snapshot.val().Telefono;
         immagine.value = snapshot.val().Img;
+        lunedi.value = snapshot.val().Orari.Lunedi;
+        martedi.value = snapshot.val().Orari.Martedi;
+        mercoledi.value = snapshot.val().Orari.Mercoledi;
+        giovedi.value = snapshot.val().Orari.Giovedi;
+        venerdi.value = snapshot.val().Orari.Venerdi;
+        sabato.value = snapshot.val().Orari.Sabato;
+        domenica.value = snapshot.val().Orari.Domenica;
         downloadFile().then();
     });
 // get file reference
@@ -59,7 +73,6 @@ if(type_database==="Realtime"){
 
 
     document.getElementById('update').onclick = async function () {
-        console.log(file);
         await update(dbRef,{
             Nome: nome.value,
             Posizione: {
@@ -69,6 +82,15 @@ if(type_database==="Realtime"){
                 CAP: cap.value,
                 Link: link.value,
                 Mappa: maps.value
+            },
+            Orari: {
+                Lunedi: lunedi.value,
+                Martedi: martedi.value,
+                Mercoledi: mercoledi.value,
+                Giovedi: giovedi.value,
+                Venerdi: venerdi.value,
+                Sabato: sabato.value,
+                Domenica: domenica.value
             },
             Valutazione: recensione.value,
             Sito_web: sito.value,
@@ -83,8 +105,7 @@ if(type_database==="Realtime"){
             await uploadBytes(storageRef, file);
         }
         alert("DATI AGGIORNATI");
-        window.location.href = '../Realtime/admin.html';
-
+        window.location.href = '../RistorantiLombardi/admin.html';
 
     }
 }else{
@@ -106,6 +127,13 @@ if(type_database==="Realtime"){
         document.getElementById("sito").value  = Ristorante.Sito_web;
         document.getElementById("maps").value = Ristorante.Posizione.Mappa;
         document.getElementById("link").value  = Ristorante.Posizione.Link;
+        document.getElementById("lunedi").value  = Ristorante.Orari.Lunedi;
+        document.getElementById("martedi").value  = Ristorante.Orari.Martedi;
+        document.getElementById("mercoledi").value  = Ristorante.Orari.Mercoledi;
+        document.getElementById("giovedi").value  = Ristorante.Orari.Giovedi;
+        document.getElementById("venerdi").value  = Ristorante.Orari.Venerdi;
+        document.getElementById("sabato").value  = Ristorante.Orari.Sabato;
+        document.getElementById("domenica").value  = Ristorante.Orari.Domenica;
         downloadFile().then();
         document.getElementById('update').onclick = async function () {
             console.log(document.getElementById("recensione").value);
@@ -119,6 +147,15 @@ if(type_database==="Realtime"){
                     CAP: document.getElementById("cap").value,
                     Link: document.getElementById("link").value,
                     Mappa: document.getElementById("maps").value
+                },
+                Orari:{
+                    Lunedi : document.getElementById("lunedi").value,
+                    Martedi : document.getElementById("martedi").value,
+                    Mercoledi : document.getElementById("mercoledi").value,
+                    Giovedi : document.getElementById("giovedi").value,
+                    Venerdi : document.getElementById("venerdi").value,
+                    Sabato : document.getElementById("sabato").value,
+                    Domenica : document.getElementById("domenica").value
                 },
                 Valutazione: document.getElementById("recensione").value,
                 Sito_web: document.getElementById("sito").value,

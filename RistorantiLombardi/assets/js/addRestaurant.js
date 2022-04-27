@@ -24,10 +24,17 @@ if (type_database === "Realtime") {
         var sito = document.getElementById('sito').value;
         var telefono = document.getElementById('telefono').value;
         var immagine = document.getElementById('immagine').value;
+        var lunedi = document.getElementById('lunedi').value;
+        var martedi = document.getElementById('martedi').value;
+        var mercoledi = document.getElementById('mercoledi').value;
+        var giovedi = document.getElementById('giovedi').value;
+        var venerdi = document.getElementById('venerdi').value;
+        var sabato = document.getElementById('sabato').value;
+        var domenica = document.getElementById('domenica').value;
         var file = document.getElementById('fileInput').files[0];
 
         if (nome === "" || via === "" || numero_civico === "" || cap === "" || citta === "" || link === "" || maps === "" || recensione === "" || sito === "" ||
-            telefono === "" || immagine === "") {
+            telefono === "" || immagine === "" || lunedi === "" || martedi === "" || mercoledi === "" || giovedi === "" || venerdi === "" || sabato === "" || domenica === "") {
             alert("Compila tutti i campi");
             return false;
         }
@@ -39,6 +46,7 @@ if (type_database === "Realtime") {
             push(ref(self.database, 'Ristoranti/'), {
                 Nome: nome,
                 Posizione: {via: via, numero_civico: numero_civico, città: citta, cap: cap, link: link, mappa: maps},
+                Orario:{lunedi: lunedi, martedi: martedi, mercoledi: mercoledi, giovedi: giovedi, venerdi: venerdi, sabato: sabato, domenica: domenica},
                 Recensione: recensione,
                 "Sito web": sito,
                 Telefono: telefono,
@@ -75,11 +83,19 @@ if (type_database === "Realtime") {
         const sito = ristoranti["sito"];
         const telefono = ristoranti["telefono"];
         const immagine = ristoranti["immagine"];
+        const lunedi = ristoranti["lunedi"];
+        const martedi = ristoranti["martedi"];
+        const mercoledi = ristoranti["mercoledi"];
+        const giovedi = ristoranti["giovedi"];
+        const venerdi = ristoranti["venerdi"];
+        const sabato = ristoranti["sabato"];
+        const domenica = ristoranti["domenica"];
 
         try {
             if (!editStatus) {
                 await saveRestaurant(nome.value, via.value, numero_civico.value, cap.value, citta.value, link.value, maps.value,
-                    recensione.value, sito.value, telefono.value, immagine.value );
+                    recensione.value, sito.value, telefono.value, immagine.value,
+                    lunedi.value, martedi.value, mercoledi.value, giovedi.value, venerdi.value, sabato.value, domenica.value );
             } else {
                 await updateRestaurant(id, {
                     nome: nome.value,
@@ -93,6 +109,13 @@ if (type_database === "Realtime") {
                     sito: sito.value,
                     telefono: telefono.value,
                     immagine: immagine.value,
+                    lunedi: lunedi.value,
+                    martedi: martedi.value,
+                    mercoledi: mercoledi.value,
+                    giovedi: giovedi.value,
+                    venerdi: venerdi.value,
+                    sabato: sabato.value,
+                    domenica: domenica.value
                 });
 
                 editStatus = false;
