@@ -46,7 +46,7 @@ if(type_database==="Realtime"){
 
 
     console.log(self.db);
-    var dbRef = ref(self.db, "/Ristoranti/"+ currentId);
+    let dbRef = ref(self.db, "/Ristoranti/"+ currentId);
     onValue(dbRef, (snapshot)=> {
         nome.value = snapshot.val().Nome;
         via.value = snapshot.val().Posizione.Via;
@@ -100,7 +100,7 @@ if(type_database==="Realtime"){
         if(fileInput.files.length !== 0)
         {
             console.log("file selezionato");
-            var file = document.getElementById('fileInput').files[0];
+            let file = document.getElementById('fileInput').files[0];
             const storageRef = sRef(storage, type_database+"/" + currentId + "/" + "Menu");
             await uploadBytes(storageRef, file);
         }
@@ -114,7 +114,7 @@ if(type_database==="Realtime"){
 
     if (Restaurant!==undefined) {
 
-        var Ristorante = Restaurant;
+        let Ristorante = Restaurant;
         console.log(Ristorante);
         document.getElementById("nome").value  = Ristorante.Nome;
         document.getElementById("immagine").value  = Ristorante.Img;
@@ -165,7 +165,7 @@ if(type_database==="Realtime"){
             if(fileInput.files.length !== 0)
             {
                 console.log("file selezionato");
-                var file = document.getElementById('fileInput').files[0];
+                let file = document.getElementById('fileInput').files[0];
                 const storageRef = sRef(storage, type_database+"/" + currentId + "/" + "Menu");
                 await uploadBytes(storageRef, file);
             }
