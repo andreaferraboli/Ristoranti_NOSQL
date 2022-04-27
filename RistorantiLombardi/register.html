@@ -102,16 +102,11 @@
 
 <script type="module">
     import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        signOut
-    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import {getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
     import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
-    import {firebaseConfig} from "./assets/js/firebaseConfig";
+    import {firebaseConfig} from "./assets/js/firebaseConfig.js";
 
-    //Firebase config
+
 
 
     // Inizializzazione
@@ -119,8 +114,7 @@
     const auth = getAuth();
     const database = getDatabase(app);
 
-    submitData.addEventListener('click', (e) => {
-
+    document.getElementById("submitData").addEventListener('click', (e) => {
         var email = document.getElementById('email').value;
         var password = document.getElementById('psw').value;
 
@@ -145,7 +139,6 @@
                 alert(errorMessage);
             });
 
-    }).catch((error) => {
     });
 
 </script>
