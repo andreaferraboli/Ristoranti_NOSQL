@@ -42,10 +42,10 @@ if (type_database === "Realtime") {
                 stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
                 stringBuilder += '<div class="card-item">'
                 stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.Via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.CAP + ", " + obj[i].Posizione.Città + '</h5></div>'
                 stringBuilder += '</div>'
                 stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                stringBuilder += '<iframe src="' + obj[i].Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
                 stringBuilder += '</div>'
                 stringBuilder += '</div>'
                 stringBuilder += '<div class="card-item">'
@@ -93,13 +93,13 @@ if (type_database === "Realtime") {
 
             var Ristorante = pick.data();
             console.log(Ristorante);
-            var Nome = Ristorante.informazioni.nome;
-            var Img = Ristorante.informazioni.immagine;
+            var Nome = Ristorante.Nome;
+            var Img = Ristorante.Img;
             var Valutazione = Ristorante.Valutazione;
-            var Via = Ristorante.posizione.via;
-            var N_civico = Ristorante.posizione.n_civico;
-            var CAP = Ristorante.posizione.CAP;
-            var Città = Ristorante.posizione.città;
+            var Via = Ristorante.Posizione.Via;
+            var N_civico = Ristorante.Posizione.N_civico;
+            var CAP = Ristorante.Posizione.CAP;
+            var Città = Ristorante.Posizione.Città;
             var Mappa = Ristorante.Posizione.Mappa;
 
             var stringBuilder = '<section class="restaurant-section section-bg">';

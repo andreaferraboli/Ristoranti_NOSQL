@@ -42,16 +42,16 @@ if(type_database === "Realtime"){
                 stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
                 stringBuilder += '<div class="card-item">'
                 stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.cap + ", " + obj[i].Posizione.città + '</h5></div>'
+                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.Via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.CAP + ", " + obj[i].Posizione.Città + '</h5></div>'
                 stringBuilder += '</div>'
                 stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<iframe src="' + obj[i].Posizione.mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+                stringBuilder += '<iframe src="' + obj[i].Posizione.Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
                 stringBuilder += '</div>'
                 stringBuilder += '</div>'
                 stringBuilder += '<div class="card-item">'
                 stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
                 stringBuilder += '<a href="' + menuLink + '" download="menù" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù" id="menu"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-                stringBuilder += '<a href="' + obj[i].Posizione.link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
+                stringBuilder += '<a href="' + obj[i].Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
                 stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
                 stringBuilder += '</div>'
                 stringBuilder += '</div>'
@@ -75,17 +75,17 @@ if(type_database === "Realtime"){
 
             var Ristorante = doc.data();
             console.log(Ristorante);
-            var Nome = Ristorante.informazioni.nome;
-            var Img = Ristorante.informazioni.immagine;
+            var Nome = Ristorante.Nome;
+            var Img = Ristorante.Img;
             var Valutazione = Ristorante.Valutazione;
-            var Via = Ristorante.posizione.via;
-            var N_civico = Ristorante.posizione.n_civico;
-            var CAP = Ristorante.posizione.CAP;
-            var Città = Ristorante.posizione.città;
-            var Telefono = Ristorante.contatti.telefono;
-            var Sito_web = Ristorante.contatti.link;
-            var Mappa = Ristorante.posizione.mappa;
-            var Link = Ristorante.posizione.link;
+            var Via = Ristorante.Posizione.Via;
+            var N_civico = Ristorante.Posizione.N_civico;
+            var CAP = Ristorante.Posizione.CAP;
+            var Città = Ristorante.Posizione.Città;
+            var Telefono = Ristorante.Telefono;
+            var Link = Ristorante.Link;
+            var Mappa = Ristorante.Posizione.Mappa;
+            var Sito_web = Ristorante.Sito_web;
 
             var stringBuilder = '<section class="restaurant-section section-bg">';
             stringBuilder += '<div class="card" >'

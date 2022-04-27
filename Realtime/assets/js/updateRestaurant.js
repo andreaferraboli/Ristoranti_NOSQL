@@ -41,12 +41,12 @@ if(type_database==="Realtime"){
     var dbRef = ref(self.db, "/Ristoranti/"+ currentId);
     onValue(dbRef, (snapshot)=> {
         nome.value = snapshot.val().Nome;
-        via.value = snapshot.val().Posizione.via;
+        via.value = snapshot.val().Posizione.Via;
         numero_civico.value = snapshot.val().Posizione.numero_civico;
-        cap.value = snapshot.val().Posizione.cap;
-        citta.value = snapshot.val().Posizione.città;
-        link.value = snapshot.val().Posizione.link;
-        maps.value = snapshot.val().Posizione.mappa;
+        cap.value = snapshot.val().Posizione.CAP;
+        citta.value = snapshot.val().Posizione.Città;
+        link.value = snapshot.val().Sito_web;
+        maps.value = snapshot.val().Posizione.Mappa;
         recensione.value = snapshot.val().Recensione;
         sito.value = snapshot.val()["Sito web"];
         telefono.value = snapshot.val().Telefono;
@@ -94,17 +94,17 @@ if(type_database==="Realtime"){
 
         var Ristorante = Restaurant;
         console.log(Ristorante);
-        document.getElementById("nome").value  = Ristorante.informazioni.nome;
-        document.getElementById("immagine").value  = Ristorante.informazioni.immagine;
-        document.getElementById("recensione").value = Ristorante.informazioni.valutazione;
-        document.getElementById("via").value = Ristorante.posizione.via;
-        document.getElementById("numero_civico").value  = Ristorante.posizione.n_civico;
-        document.getElementById("cap").value  = Ristorante.posizione.CAP;
-        document.getElementById("citta").value = Ristorante.posizione.città;
-        document.getElementById("telefono").value  = Ristorante.contatti.telefono;
-        document.getElementById("sito").value  = Ristorante.contatti.link;
-        document.getElementById("maps").value = Ristorante.posizione.mappa;
-        document.getElementById("link").value  = Ristorante.posizione.link;
+        document.getElementById("nome").value  = Ristorante.Nome;
+        document.getElementById("immagine").value  = Ristorante.Img;
+        document.getElementById("recensione").value = Ristorante.Valutazione;
+        document.getElementById("via").value = Ristorante.Posizione.Via;
+        document.getElementById("numero_civico").value  = Ristorante.Posizione.N_civico;
+        document.getElementById("cap").value  = Ristorante.Posizione.CAP;
+        document.getElementById("citta").value = Ristorante.Posizione.Città;
+        document.getElementById("telefono").value  = Ristorante.Telefono;
+        document.getElementById("sito").value  = Ristorante.Sito_web;
+        document.getElementById("maps").value = Ristorante.Posizione.Mappa;
+        document.getElementById("link").value  = Ristorante.Posizione.Link;
         downloadFile().then();
         document.getElementById('update').onclick = async function () {
             console.log(document.getElementById("recensione").value);
