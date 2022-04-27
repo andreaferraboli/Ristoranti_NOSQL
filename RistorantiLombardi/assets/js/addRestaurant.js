@@ -1,9 +1,8 @@
 import {getStorage, ref as sRef, uploadBytes,} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {getDatabase, push, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-import {firebaseConfig, type_database} from "./firebaseConfig.js";
+import {firebaseConfig} from "./firebaseConfig.js";
 import {addDoc, collection, getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
-import {saveRestaurant, updateRestaurant} from "./firebase.js";
 
 
 // Initialize Firebase
@@ -11,6 +10,16 @@ const app = initializeApp(firebaseConfig);
 // Set database variable
 self.database = getDatabase(app);
 self.firebase = getFirestore(app);
+// set_type_database("Firestore");
+document.getElementById("type_database").innerHTML = localStorage.getItem("type_database");
+document.getElementById("type_database").addEventListener('click',(e)=>{
+    if (document.getElementById("type_database").textContent === "Realtime") {
+        localStorage.setItem('type_database', "Firestore");
+    } else {
+        localStorage.setItem('type_database', "Realtime");
+    }
+    window.location.reload("./addRestaurant.html");
+});
 
 document.getElementById("submit").addEventListener('click', async () => {
     let nome = document.getElementById("nome").value;

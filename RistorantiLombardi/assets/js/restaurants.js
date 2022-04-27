@@ -1,6 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-import {firebaseConfig, type_database} from "./firebaseConfig.js";
+import {firebaseConfig} from "./firebaseConfig.js";
 import {
     getDownloadURL,
     getStorage,
@@ -17,13 +17,24 @@ const app = initializeApp(firebaseConfig);
 self.db = getDatabase(app);
 self.firebase = getFirestore(app);
 const storage = getStorage(app);
+let type_database=localStorage.getItem("type_database")
+document.getElementById("type_database").innerHTML = type_database;
+document.getElementById("type_database").addEventListener('click',(e)=>{
+    if (document.getElementById("type_database").textContent === "Realtime") {
+        alert("ciao1");
+        localStorage.setItem('type_database', "Firestore");
+    } else {
+        alert("ciao2");
+        localStorage.setItem('type_database', "Realtime");
+    }
+    window.location.reload("./restaurants.html");
+});
 
 
 const output1 = document.getElementById("restaurants");
 let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante,
     sectionRistorante;
 let Lunedi, Martedi, Mercoledi, Giovedi, Venerdi, Sabato, Domenica;
-
 
 if (type_database === "Realtime") {
     let dbRef = ref(self.db, "/Ristoranti/");
@@ -103,8 +114,7 @@ if (type_database === "Realtime") {
     let i = 0;
     docs.forEach(
         async (doc) => {
-            i = parseInt(doc.id);
-            console.log("i:"+i);
+            i = doc.id;
             let storageRef = refS(storage, type_database + '/' + i);
             let fileRef = (await listAll(storageRef)).items[0];
 

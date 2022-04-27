@@ -413,7 +413,7 @@ border: 1px solid #000000;
   opacity: 1;
 }
 .admin-admin{
-  margin-right: 15%;
+  margin-right: 10%;
   border: 2px solid var(--primary-color);
   color: var(--text-color);
   border-radius: 50px;

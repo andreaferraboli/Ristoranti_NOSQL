@@ -1,4 +1,4 @@
-
+localStorage.setItem('type_database', "Firestore");
 (function() {
   "use strict";
 

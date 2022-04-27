@@ -15,13 +15,24 @@ import {
     getFirestore,
     query
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
-import {firebaseConfig, type_database} from "./firebaseConfig.js";
+import {firebaseConfig} from "./firebaseConfig.js";
 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const firebase = getFirestore(app);
+
+document.getElementById("type_database").innerHTML = localStorage.getItem("type_database");
+document.getElementById("type_database").addEventListener('click',(e)=>{
+    if (document.getElementById("type_database").textContent === "Realtime") {
+        localStorage.setItem('type_database', "Firestore");
+    } else {
+        localStorage.setItem('type_database', "Realtime");
+    }
+    window.location.reload("./restaurants.html");
+});
+
 
 const output1 = document.getElementById("restaurants");
 let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante,

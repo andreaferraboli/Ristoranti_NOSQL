@@ -1,13 +1,14 @@
-import {ref, onValue, update,} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
+import {getDatabase, onValue, ref, update,} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
-import {getDatabase} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {
+    getDownloadURL,
     getStorage,
+    listAll,
     ref as refS,
-    getBytes,
-    listAll, getDownloadURL, ref as sRef, uploadBytes
+    ref as sRef,
+    uploadBytes
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
-import {firebaseConfig,type_database} from "./firebaseConfig.js";
+import {firebaseConfig, type_database} from "./firebaseConfig.js";
 import {doc, getDoc, getFirestore, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
@@ -20,6 +21,7 @@ self.firebase = getFirestore(app);
 const storage = getStorage(app);
 
 let currentId = localStorage.getItem('currentId');
+
 if(type_database==="Realtime"){
 
 
