@@ -4,10 +4,15 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
-import {firebaseConfig,type_database} from "./firebaseConfig.js";
-import {getDownloadURL,getStorage,listAll,ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
+import {firebaseConfig, type_database} from "./firebaseConfig.js";
+import {
+    getDownloadURL,
+    getStorage,
+    listAll,
+    ref as refS
+} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
-import { getDocs, collection, query } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+import {getDocs, collection, query} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
 // Initialize Firebase
@@ -17,106 +22,129 @@ const app = initializeApp(firebaseConfig);
 self.db = getDatabase(app);
 self.firebase = getFirestore(app);
 const storage = getStorage(app);
-if(type_database === "Realtime"){
-    const output1 = document.getElementById("restaurants");
+
+
+const output1 = document.getElementById("restaurants");
+let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante, sectionRistorante;
+
+if (type_database === "Realtime") {
     let dbRef = ref(self.db, "/Ristoranti/");
 
     onValue(dbRef, async (snap) => {
 
         const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
         for (const i of Object.keys(obj)) {
-            let storageRef = refS(storage, type_database+'/' + i);
+            let storageRef = refS(storage, type_database + '/' + i);
             let fileRef = (await listAll(storageRef)).items[0];
-            let menuLink;
+
             getDownloadURL(fileRef).then(function (url) {
+
+                let Ristorante = obj[i];
+                Nome = Ristorante.Nome;
+                Img = Ristorante.Img;
+                Valutazione = Ristorante.Valutazione;
+                Via = Ristorante.Posizione.Via;
+                N_civico = Ristorante.Posizione.N_civico;
+                CAP = Ristorante.Posizione.CAP;
+                Città = Ristorante.Posizione.Città;
+                Telefono = Ristorante.Telefono;
+                Link = Ristorante.Link;
+                Mappa = Ristorante.Posizione.Mappa;
+                Sito_web = Ristorante.Sito_web;
                 menuLink = url.valueOf();
-                var stringBuilder = '<section class="restaurant-section section-bg">';
-                stringBuilder += '<div class="card" >'
-                stringBuilder += '<div class="row no-gutters">'
-                stringBuilder += '<div class="col-sm-5 cardImg">'
-                stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="">'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="col-sm-7 card-div">'
-                stringBuilder += '<div class="card-body">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-                stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
-                stringBuilder += '<div class="card-item">'
-                stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.Via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.CAP + ", " + obj[i].Posizione.Città + '</h5></div>'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<iframe src="' + obj[i].Posizione.Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="card-item">'
-                stringBuilder += '<a href="' + obj[i]["Sito web"] + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
-                stringBuilder += '<a href="' + menuLink + '" download="menù" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù" id="menu"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-                stringBuilder += '<a href="' + obj[i].Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
-                stringBuilder += '<a href="tel:' + obj[i].Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</section>'
-                output1.innerHTML += stringBuilder;
+                sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
+            <div class="row no-gutters">
+            <div class="col-sm-5 cardImg">
+            <img class="Img" src="${Img}" alt="" >
+            </div>
+            <div class="col-sm-7 card-div">
+            <div class="card-body">
+            <div class="card-item"><h5 class="card-title">${Nome}</h5></div>
+            <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
+            <div class="card-item">
+            <div class="col-sm-6">
+            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5></div>
+            </div>
+            <div class="col-sm-6">
+            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            </div>
+'<div class="card-item">
+            <a href="${Sito_web}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>
+            <a href="${menuLink}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>
+            <a href="${Link}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>
+            <a href="tel:${Telefono}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>`
+
+                output1.innerHTML += sectionRistorante;
             });
         }
     });
-}else{
+} else {
 
 
-    let collectionRef=collection(firebase, "ristoranti");
-    let docs=await getDocs(query(collectionRef));
+    let collectionRef = collection(firebase, "ristoranti");
+    let docs = await getDocs(query(collectionRef));
 
-    let i=0;
+    let i = 0;
     docs.forEach(
-        (doc) =>{
-            i=parseInt(doc.id);
+        async (doc) => {
+            i = parseInt(doc.id);
+            let storageRef = refS(storage, type_database + '/' + i);
+            let fileRef = (await listAll(storageRef)).items[0];
 
-            var Ristorante = doc.data();
-            console.log(Ristorante);
-            var Nome = Ristorante.Nome;
-            var Img = Ristorante.Img;
-            var Valutazione = Ristorante.Valutazione;
-            var Via = Ristorante.Posizione.Via;
-            var N_civico = Ristorante.Posizione.N_civico;
-            var CAP = Ristorante.Posizione.CAP;
-            var Città = Ristorante.Posizione.Città;
-            var Telefono = Ristorante.Telefono;
-            var Link = Ristorante.Link;
-            var Mappa = Ristorante.Posizione.Mappa;
-            var Sito_web = Ristorante.Sito_web;
+            getDownloadURL(fileRef).then(function (url) {
+                Ristorante = doc.data();
+                Nome = Ristorante.Nome;
+                Img = Ristorante.Img;
+                Valutazione = Ristorante.Valutazione;
+                Via = Ristorante.Posizione.Via;
+                N_civico = Ristorante.Posizione.N_civico;
+                CAP = Ristorante.Posizione.CAP;
+                Città = Ristorante.Posizione.Città;
+                Telefono = Ristorante.Telefono;
+                Link = Ristorante.Link;
+                Mappa = Ristorante.Posizione.Mappa;
+                Sito_web = Ristorante.Sito_web;
+                menuLink = url.valueOf();
+                sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
+            <div class="row no-gutters">
+            <div class="col-sm-5 cardImg">
+            <img class="Img" src="${Img}"  alt="">
+            </div>
+            <div class="col-sm-7 card-div">
+            <div class="card-body">
+            <div class="card-item"><h5 class="card-title">${Nome}</h5></div>
+            <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
+            <div class="card-item">
+            <div class="col-sm-6">
+            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5></div>
+            </div>
+            <div class="col-sm-6">
+            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            </div>
+            <div class="card-item">
+            <a href="${Sito_web}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>
+            <a href="${menuLink}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>
+            <a href="${Link}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>
+            <a href="tel:${Telefono}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>`
 
-            var stringBuilder = '<section class="restaurant-section section-bg">';
-            stringBuilder += '<div class="card" >'
-            stringBuilder += '<div class="row no-gutters">'
-            stringBuilder += '<div class="col-sm-5 cardImg">'
-            stringBuilder += '<img class="Img" src="' + Img + '" alt="Suresh Dasari Card">'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="col-sm-7 card-div">'
-            stringBuilder += '<div class="card-body">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Nome + '</h5></div>'
-            stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + Valutazione + '<span class="star" >&starf;</span></p></div>'
-            stringBuilder += '<div class="card-item">'
-            stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Via + "," + N_civico + "," + CAP + ", " + Città + '</h5></div>'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<iframe src="' + Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="card-item">'
-            stringBuilder += '<a href="' + Sito_web + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>'
-            stringBuilder += '<a href="php/' + Nome + ".php" + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>'
-            stringBuilder += '<a href="' + Link + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>'
-            stringBuilder += '<a href="tel:' + Telefono + '" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Chiama"><i class=\'bx bx-phone bx-sm\' ></i></a>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</section>'
-
-
-            document.getElementById("restaurants").innerHTML += stringBuilder;
+                output1.innerHTML += sectionRistorante;
+            });
         });
+
 }
+
+
+
+
