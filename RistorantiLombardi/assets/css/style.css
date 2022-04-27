@@ -278,7 +278,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
   color: var(--hover-primary-color);
 }
-.navbar .dropdown ul {
+.navbar ul {
   display: block;
   position: absolute;
   left: 14px;
@@ -293,40 +293,40 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.3s;
   border-radius: 4px;
 }
-.navbar .dropdown ul li {
+.navbar  ul li {
   min-width: 200px;
 }
-.navbar .dropdown ul a {
+.navbar  ul a {
   padding: 10px 20px;
   color: #444444;
 }
-.navbar .dropdown ul a i {
+.navbar  ul a i {
   font-size: 12px;
 }
-.navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
+.navbar  ul a:hover, .navbar  ul .active:hover, .navbar  ul li:hover > a {
   color: var(--primary-color);
 }
-.navbar .dropdown:hover > ul {
+.navbar :hover > ul {
   opacity: 1;
   top: 100%;
   visibility: visible;
 }
-.navbar .dropdown .dropdown ul {
+.navbar   ul {
   top: 0;
   left: calc(100% - 30px);
   visibility: hidden;
 }
-.navbar .dropdown .dropdown:hover > ul {
+.navbar  :hover > ul {
   opacity: 1;
   top: 0;
   left: 100%;
   visibility: visible;
 }
 @media (max-width: 1366px) {
-  .navbar .dropdown .dropdown ul {
+  .navbar   ul {
     left: -90%;
   }
-  .navbar .dropdown .dropdown:hover > ul {
+  .navbar  :hover > ul {
     left: -100%;
   }
 }
@@ -392,7 +392,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile .getstarted, .navbar-mobile .getstarted:focus {
   margin: 15px;
 }
-.navbar-mobile .dropdown ul {
+.navbar-mobile  ul {
   position: static;
   display: none;
   margin: 10px 20px;
@@ -403,19 +403,19 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--text-color);
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
-.navbar-mobile .dropdown ul li {
+.navbar-mobile  ul li {
   min-width: 200px;
 }
-.navbar-mobile .dropdown ul a {
+.navbar-mobile  ul a {
   padding: 10px 20px;
 }
-.navbar-mobile .dropdown ul a i {
+.navbar-mobile  ul a i {
   font-size: 12px;
 }
-.navbar-mobile .dropdown ul a:hover, .navbar-mobile .dropdown ul .active:hover, .navbar-mobile .dropdown ul li:hover > a {
+.navbar-mobile  ul a:hover, .navbar-mobile  ul .active:hover, .navbar-mobile  ul li:hover > a {
   color: var(--primary-color);
 }
-.navbar-mobile .dropdown > .dropdown-active {
+.navbar-mobile  > -active {
   display: block;
 }
 

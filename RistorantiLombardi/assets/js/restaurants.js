@@ -1,7 +1,3 @@
-// documentazione
-// https://firebase.google.com/docs/database/web/read-and-write
-
-// Import the functions you need from the SDKs you need
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {getDatabase, onValue, ref} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-database.js";
 import {firebaseConfig, type_database} from "./firebaseConfig.js";
@@ -11,8 +7,7 @@ import {
     listAll,
     ref as refS
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
-import {getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
-import {getDocs, collection, query} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+import {collection, getDocs, getFirestore, query} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
 // Initialize Firebase
@@ -36,21 +31,28 @@ if (type_database === "Realtime") {
         for (const i of Object.keys(obj)) {
             let storageRef = refS(storage, type_database + '/' + i);
             let fileRef = (await listAll(storageRef)).items[0];
-
+            let menuLink;
             getDownloadURL(fileRef).then(function (url) {
+                Nome = obj[i].Nome;
+                Img = obj[i].Img;
+                Valutazione = obj[i].Valutazione;
+                Via = obj[i].Posizione.Via;
+                N_civico = obj[i].Posizione.N_civico;
+                CAP = obj[i].Posizione.CAP;
+                Città = obj[i].Posizione.Città;
+                Telefono = obj[i].Telefono;
+                Link = obj[i].Link;
+                Mappa = obj[i].Posizione.Mappa;
+                Sito_web = obj[i].Sito_web;
+                Lunedi = obj[i].Orari.Lunedi;
+                Martedi = obj[i].Orari.Martedi;
+                Mercoledi = obj[i].Orari.Mercoledi;
+                Giovedi = obj[i].Orari.Giovedi;
+                Venerdi = obj[i].Orari.Venerdi;
+                Sabato = obj[i].Orari.Sabato;
+                Domenica = obj[i].Orari.Domenica;
 
-                let Ristorante = obj[i];
-                Nome = Ristorante.Nome;
-                Img = Ristorante.Img;
-                Valutazione = Ristorante.Valutazione;
-                Via = Ristorante.Posizione.Via;
-                N_civico = Ristorante.Posizione.N_civico;
-                CAP = Ristorante.Posizione.CAP;
-                Città = Ristorante.Posizione.Città;
-                Telefono = Ristorante.Telefono;
-                Link = Ristorante.Link;
-                Mappa = Ristorante.Posizione.Mappa;
-                Sito_web = Ristorante.Sito_web;
+
                 menuLink = url.valueOf();
                 sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
             <div class="row no-gutters">
@@ -64,12 +66,19 @@ if (type_database === "Realtime") {
             <div class="card-item">
             <div class="col-sm-6">
             <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5></div>
+            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
+            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
+            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
+            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
+            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
+            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
+            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>   
             </div>
             <div class="col-sm-6">
             <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             </div>
-'<div class="card-item">
+            <div class="card-item">
             <a href="${Sito_web}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Sito web"><i class="bx bx-world bx-sm"></i></a>
             <a href="${menuLink}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Menù"><i class=\'bx bx-food-menu bx-sm\' ></i></a>
             <a href="${Link}" target="_blank" class="btn-restaurant" data-toggle="tooltip" data-placement="top" title="Indicazioni"><i class="bx bx-trip bx-sm"></i></a>
@@ -110,6 +119,13 @@ if (type_database === "Realtime") {
                 Link = Ristorante.Link;
                 Mappa = Ristorante.Posizione.Mappa;
                 Sito_web = Ristorante.Sito_web;
+                Lunedi = Ristorante.Orari.Lunedi;
+                Martedi = Ristorante.Orari.Martedi;
+                Mercoledi = Ristorante.Orari.Mercoledi;
+                Giovedi = Ristorante.Orari.Giovedi;
+                Venerdi = Ristorante.Orari.Venerdi;
+                Sabato = Ristorante.Orari.Sabato;
+                Domenica = Ristorante.Orari.Domenica;
                 menuLink = url.valueOf();
                 sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
             <div class="row no-gutters">
@@ -122,10 +138,17 @@ if (type_database === "Realtime") {
             <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
             <div class="card-item">
             <div class="col-sm-6">
-            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5></div>
+            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5> </div>
+            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
+            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
+            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
+            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
+            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
+            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
+            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>                                              
             </div>
             <div class="col-sm-6">
-            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            
             </div>
             </div>
             <div class="card-item">
@@ -137,14 +160,8 @@ if (type_database === "Realtime") {
             </div>
             </div>
             </div>
-            </section>`
-
+            </section>`;
                 output1.innerHTML += sectionRistorante;
             });
         });
-
 }
-
-
-
-
