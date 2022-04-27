@@ -1,4 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 import {
     getFirestore,
     collection,
@@ -10,19 +9,6 @@ import {
     getDoc,
     updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-firestore.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAyK1ThxpKUGHEKtlg4W3EJZEBnPHjH-Ic",
-    authDomain: "ristoranti-31ef8.firebaseapp.com",
-    databaseURL: "https://ristoranti-31ef8-default-rtdb.firebaseio.com",
-    projectId: "ristoranti-31ef8",
-    storageBucket: "ristoranti-31ef8.appspot.com",
-    messagingSenderId: "236248778413",
-    appId: "1:236248778413:web:0b004e239a04c74793a824"
-};
-
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore();
 
 /**
  * Save a New Task in Firestore
