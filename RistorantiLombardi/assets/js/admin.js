@@ -9,54 +9,83 @@ import {
 import {deleteObject, getStorage, ref as refS} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {
     collection,
+    deleteDoc,
+    doc,
     getDocs,
     getFirestore,
-    query,
-    doc,
-    deleteDoc
+    query
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 import {firebaseConfig, type_database} from "./firebaseConfig.js";
 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getDatabase(app);
-self.firebase = getFirestore(app);
+const firebase = getFirestore(app);
+
+const output1 = document.getElementById("restaurants");
+let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante,
+    sectionRistorante;
+let Lunedi, Martedi, Mercoledi, Giovedi, Venerdi, Sabato, Domenica;
+
 if (type_database === "Realtime") {
-    const output1 = document.getElementById("restaurants");
     let dbRef = queryF(ref(db, '/Ristoranti/'));
     onValue(dbRef, (snap) => {
         const obj = JSON.parse(JSON.stringify(snap.val(), null, 2));
         for (const i of Object.keys(obj)) {
             if (obj[i] != null) {
-                let stringBuilder = '<section class="restaurant-section section-bg">';
-                stringBuilder += '<div class="card" >'
-                stringBuilder += '<div class="row no-gutters">'
-                stringBuilder += '<div class="col-sm-5 cardImg">'
-                stringBuilder += '<img class="Img" src="' + obj[i].Img + '" alt="">'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="col-sm-7 card-div">'
-                stringBuilder += '<div class="card-body">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Nome + '</h5></div>'
-                stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + obj[i].Recensione + '<span class="star" >&starf;</span></p></div>'
-                stringBuilder += '<div class="card-item">'
-                stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<div class="card-item"><h5 class="card-title">' + obj[i].Posizione.Via + "," + obj[i].Posizione["numero_civico"] + "," + obj[i].Posizione.CAP + ", " + obj[i].Posizione.Città + '</h5></div>'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="col-sm-6">'
-                stringBuilder += '<iframe src="' + obj[i].Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '<div class="card-item">'
-                stringBuilder += '<button  id="button_delete_' + i + '" class="btn-delete" data-toggle="tooltip" data-placement="top" title="elimina">Elimina</button>'
-                stringBuilder += '<button id="button_modify_' + i + '" class="btn-modify" data-toggle="tooltip" data-placement="top" title="modifica">Modifica</button>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</div>'
-                stringBuilder += '</section>'
-                output1.innerHTML += stringBuilder;
+                Ristorante = obj[i];
+                Nome = Ristorante.Nome;
+                Img = Ristorante.Img;
+                Valutazione = Ristorante.Valutazione;
+                Via = Ristorante.Posizione.Via;
+                N_civico = Ristorante.Posizione.N_civico;
+                CAP = Ristorante.Posizione.CAP;
+                Città = Ristorante.Posizione.Città;
+                Telefono = Ristorante.Telefono;
+                Link = Ristorante.Link;
+                Mappa = Ristorante.Posizione.Mappa;
+                Sito_web = Ristorante.Sito_web;
+                Lunedi = Ristorante.Orari.Lunedi;
+                Martedi = Ristorante.Orari.Martedi;
+                Mercoledi = Ristorante.Orari.Mercoledi;
+                Giovedi = Ristorante.Orari.Giovedi;
+                Venerdi = Ristorante.Orari.Venerdi;
+                Sabato = Ristorante.Orari.Sabato;
+                Domenica = Ristorante.Orari.Domenica;
+                sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
+            <div class="row no-gutters">
+            <div class="col-sm-5 cardImg">
+            <img class="Img" src="${Img}"  alt="">
+            </div>
+            <div class="col-sm-7 card-div">
+            <div class="card-body">
+            <div class="card-item"><h5 class="card-title">${Nome}</h5></div>
+            <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
+            <div class="card-item">
+            <div class="col-sm-6">
+            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5> </div>
+            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
+            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
+            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
+            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
+            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
+            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
+            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>                                              
+            </div>
+            <div class="col-sm-6">
+            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            
+            </div>
+            </div>
+            <div class="card-item">
+            <button  id="button_delete_${i}" class="btn-delete" data-toggle="tooltip" data-placement="top" title="elimina">Elimina</button>
+                <button id="button_modify_${i}" class="btn-modify" data-toggle="tooltip" data-placement="top" title="modifica">Modifica</button>
+           </div>
+            </div>
+            </div>
+            </div>
+            </section>`;
+                output1.innerHTML += sectionRistorante;
                 document.addEventListener('click', async function (e) {
                     if (e.target && e.target.id === 'button_delete_' + i) {
                         let restaurantRef = ref(db, "Ristoranti" + "/" + i);
@@ -93,44 +122,58 @@ if (type_database === "Realtime") {
 
             var Ristorante = pick.data();
             console.log(Ristorante);
-            var Nome = Ristorante.Nome;
-            var Img = Ristorante.Img;
-            var Valutazione = Ristorante.Valutazione;
-            var Via = Ristorante.Posizione.Via;
-            var N_civico = Ristorante.Posizione.N_civico;
-            var CAP = Ristorante.Posizione.CAP;
-            var Città = Ristorante.Posizione.Città;
-            var Mappa = Ristorante.Posizione.Mappa;
 
-            var stringBuilder = '<section class="restaurant-section section-bg">';
-            stringBuilder += '<div class="card" >'
-            stringBuilder += '<div class="row no-gutters">'
-            stringBuilder += '<div class="col-sm-5 cardImg">'
-            stringBuilder += '<img class="Img" src="' + Img + '" >'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="col-sm-7 card-div">'
-            stringBuilder += '<div class="card-body">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Nome + '</h5></div>'
-            stringBuilder += '<div class="card-item"><p class="card-text">Valutazione: ' + Valutazione + '<span class="star" >&starf;</span></p></div>'
-            stringBuilder += '<div class="card-item">'
-            stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<div class="card-item"><h5 class="card-title">' + Via + "," + N_civico + "," + CAP + ", " + Città + '</h5></div>'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="col-sm-6">'
-            stringBuilder += '<iframe src="' + Mappa + '" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '<div class="card-item">'
-            stringBuilder += '<button id="button_delete_' + i + '" class="btn-delete" data-toggle="tooltip" data-placement="top" title="elimina">Elimina</button>'
-            stringBuilder += '<button id="button_modify_' + i + '" class="btn-modify" data-toggle="tooltip" data-placement="top" title="modifica">Modifica</button>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</div>'
-            stringBuilder += '</section>'
-
-
-            document.getElementById("restaurants").innerHTML += stringBuilder;
+            Nome = Ristorante.Nome;
+            Img = Ristorante.Img;
+            Valutazione = Ristorante.Valutazione;
+            Via = Ristorante.Posizione.Via;
+            N_civico = Ristorante.Posizione.N_civico;
+            CAP = Ristorante.Posizione.CAP;
+            Città = Ristorante.Posizione.Città;
+            Telefono = Ristorante.Telefono;
+            Link = Ristorante.Link;
+            Mappa = Ristorante.Posizione.Mappa;
+            Sito_web = Ristorante.Sito_web;
+            Lunedi = Ristorante.Orari.Lunedi;
+            Martedi = Ristorante.Orari.Martedi;
+            Mercoledi = Ristorante.Orari.Mercoledi;
+            Giovedi = Ristorante.Orari.Giovedi;
+            Venerdi = Ristorante.Orari.Venerdi;
+            Sabato = Ristorante.Orari.Sabato;
+            Domenica = Ristorante.Orari.Domenica;
+            sectionRistorante = `<section class="restaurant-section section-bg"><div class="card" >
+            <div class="row no-gutters">
+            <div class="col-sm-5 cardImg">
+            <img class="Img" src="${Img}"  alt="">
+            </div>
+            <div class="col-sm-7 card-div">
+            <div class="card-body">
+            <div class="card-item"><h5 class="card-title">${Nome}</h5></div>
+            <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
+            <div class="card-item">
+            <div class="col-sm-6">
+            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5> </div>
+            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
+            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
+            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
+            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
+            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
+            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
+            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>                                              
+            </div>
+            <div class="col-sm-6">
+            <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            
+            </div>
+            </div>
+            <div class="card-item">
+            <button  id="button_delete_${i}" class="btn-delete" data-toggle="tooltip" data-placement="top" title="elimina">Elimina</button>
+                <button id="button_modify_${i}" class="btn-modify" data-toggle="tooltip" data-placement="top" title="modifica">Modifica</button>
+           </div>
+            </div>
+            </div>
+            </div>
+            </section>`;
+            output1.innerHTML += sectionRistorante;
             document.addEventListener('click', async function (e) {
                 if (e.target && e.target.id === 'button_delete_' + i) {
                     await deleteDoc(doc(firebase, "ristoranti", pick.id));

@@ -18,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 self.db= getDatabase(app);
 self.firebase = getFirestore(app);
 const storage = getStorage(app);
+
 let currentId = localStorage.getItem('currentId');
 if(type_database==="Realtime"){
 
@@ -42,13 +43,13 @@ if(type_database==="Realtime"){
     onValue(dbRef, (snapshot)=> {
         nome.value = snapshot.val().Nome;
         via.value = snapshot.val().Posizione.Via;
-        numero_civico.value = snapshot.val().Posizione.numero_civico;
+        numero_civico.value = snapshot.val().Posizione.N_civico;
         cap.value = snapshot.val().Posizione.CAP;
         citta.value = snapshot.val().Posizione.Città;
-        link.value = snapshot.val().Sito_web;
+        link.value = snapshot.val().Posizione.Link;
         maps.value = snapshot.val().Posizione.Mappa;
-        recensione.value = snapshot.val().Recensione;
-        sito.value = snapshot.val()["Sito web"];
+        recensione.value = snapshot.val().Valutazione;
+        sito.value = snapshot.val().Sito_web;
         telefono.value = snapshot.val().Telefono;
         immagine.value = snapshot.val().Img;
         downloadFile().then();
@@ -62,15 +63,15 @@ if(type_database==="Realtime"){
         await update(dbRef,{
             Nome: nome.value,
             Posizione: {
-                via: via.value,
-                numero_civico: numero_civico.value,
-                città: citta.value,
-                cap: cap.value,
-                link: link.value,
-                mappa: maps.value
+                Via: via.value,
+                N_civico: numero_civico.value,
+                Città: citta.value,
+                CAP: cap.value,
+                Link: link.value,
+                Mappa: maps.value
             },
-            Recensione: recensione.value,
-            "Sito web": sito.value,
+            Valutazione: recensione.value,
+            Sito_web: sito.value,
             Telefono: telefono.value,
             Img: immagine.value
         });
