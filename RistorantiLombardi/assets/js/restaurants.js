@@ -20,7 +20,10 @@ const storage = getStorage(app);
 
 
 const output1 = document.getElementById("restaurants");
-let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante, sectionRistorante;
+let Nome, Img, Valutazione, Via, N_civico, CAP, Città, Telefono, Link, Mappa, Sito_web, menuLink, Ristorante,
+    sectionRistorante;
+let Lunedi, Martedi, Mercoledi, Giovedi, Venerdi, Sabato, Domenica;
+
 
 if (type_database === "Realtime") {
     let dbRef = ref(self.db, "/Ristoranti/");
@@ -87,7 +90,7 @@ if (type_database === "Realtime") {
             </div>
             </div>
             </div>
-            </section>`
+            </section>`;
 
                 output1.innerHTML += sectionRistorante;
             });
@@ -103,6 +106,7 @@ if (type_database === "Realtime") {
     docs.forEach(
         async (doc) => {
             i = parseInt(doc.id);
+            console.log("i:"+i);
             let storageRef = refS(storage, type_database + '/' + i);
             let fileRef = (await listAll(storageRef)).items[0];
 
@@ -163,5 +167,6 @@ if (type_database === "Realtime") {
             </section>`;
                 output1.innerHTML += sectionRistorante;
             });
+
         });
 }
