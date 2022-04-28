@@ -64,6 +64,10 @@
                         <input class="input100" id="psw" name="psw" placeholder="Password" required type="password">
                         <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                     </div>
+                    <div class="wrap-input100 validate-input" data-validate="Conferma password">
+                        <input class="input100" id="psw2" name="psw" placeholder="Conferma Password" required type="password">
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
 
                     <div class="container-login100-form-btn m-t-32">
                         <button class="login100-form-btn" id="submitData" name="submitData" type="button">Register
@@ -117,27 +121,34 @@
     document.getElementById("submitData").addEventListener('click', (e) => {
         var email = document.getElementById('email').value;
         var password = document.getElementById('psw').value;
-
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                set(ref(database, 'users/' + user.uid), {
-                    email: email,
-                    password: password
-                })
-                    .then(() => {
-                        alert('user created successfully');
-                        window.location.href = 'login.html';
+        var password_confirm = document.getElementById('psw2').value;
+        if(password === password_confirm){
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    set(ref(database, 'users/' + user.uid), {
+                        email: email,
+                        password: password
                     })
-                    .catch((error) => {
-                        alert(error);
-                    });
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
+                        .then(() => {
+                            alert('user created successfully');
+                            window.location.href = 'login.html';
+                        })
+                        .catch((error) => {
+                            alert(error);
+                        });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        }else{
+            document.getElementById('psw').value='';
+            document.getElementById('psw2').value='';
+            alert("le due password non coincidono,riprovare");
+        }
+
 
     });
 
