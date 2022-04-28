@@ -17,14 +17,12 @@ const app = initializeApp(firebaseConfig);
 self.db = getDatabase(app);
 self.firebase = getFirestore(app);
 const storage = getStorage(app);
-let type_database=localStorage.getItem("type_database")
+let type_database = localStorage.getItem("type_database");
 document.getElementById("type_database").innerHTML = type_database;
-document.getElementById("type_database").addEventListener('click',(e)=>{
-    if (document.getElementById("type_database").textContent === "Realtime") {
-        alert("ciao1");
+document.getElementById("type_database").addEventListener('click', (e) => {
+    if (localStorage.getItem("type_database") === "Realtime") {
         localStorage.setItem('type_database', "Firestore");
     } else {
-        alert("ciao2");
         localStorage.setItem('type_database', "Realtime");
     }
     window.location.reload("./restaurants.html");

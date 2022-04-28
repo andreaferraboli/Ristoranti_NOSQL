@@ -23,8 +23,9 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const firebase = getFirestore(app);
 
+let type_database = localStorage.getItem("type_database");
 document.getElementById("type_database").innerHTML = localStorage.getItem("type_database");
-document.getElementById("type_database").addEventListener('click',(e)=>{
+document.getElementById("type_database").addEventListener('click', (e) => {
     if (document.getElementById("type_database").textContent === "Realtime") {
         localStorage.setItem('type_database', "Firestore");
     } else {

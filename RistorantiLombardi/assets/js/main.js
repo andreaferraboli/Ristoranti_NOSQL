@@ -1,4 +1,5 @@
-localStorage.setItem('type_database', "Firestore");
+if (localStorage.getItem("type_database") != "Realtime")
+  localStorage.setItem('type_database', "Firestore");
 (function() {
   "use strict";
 

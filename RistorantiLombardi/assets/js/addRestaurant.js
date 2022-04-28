@@ -11,16 +11,17 @@ const app = initializeApp(firebaseConfig);
 self.database = getDatabase(app);
 self.firebase = getFirestore(app);
 // set_type_database("Firestore");
+
+let type_database = localStorage.getItem("type_database");
 document.getElementById("type_database").innerHTML = localStorage.getItem("type_database");
-document.getElementById("type_database").addEventListener('click',(e)=>{
+document.getElementById("type_database").addEventListener('click', (e) => {
     if (document.getElementById("type_database").textContent === "Realtime") {
         localStorage.setItem('type_database', "Firestore");
     } else {
         localStorage.setItem('type_database', "Realtime");
     }
-    window.location.reload("./addRestaurant.html");
+    window.location.reload("./restaurants.html");
 });
-
 document.getElementById("submit").addEventListener('click', async () => {
     let nome = document.getElementById("nome").value;
     let via = document.getElementById("via").value;

@@ -1,17 +1,16 @@
 import {
-    getFirestore,
-    collection,
-    getDocs,
-    onSnapshot,
     addDoc,
+    collection,
     deleteDoc,
     doc,
     getDoc,
+    getDocs,
+    getFirestore,
+    onSnapshot,
     updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {firebaseConfig} from "./firebaseConfig.js";
-
 
 
 const app = initializeApp(firebaseConfig);
