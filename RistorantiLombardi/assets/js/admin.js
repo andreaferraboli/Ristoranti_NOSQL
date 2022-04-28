@@ -109,10 +109,9 @@ if (type_database === "Realtime") {
                         await deleteObject(desertRef).then(() => {
                             console.log("file eliminato");
                         }).catch((error) => {
-                            alert("file non eliminati");
-                            return false;
+                            console.log(error);
                         });
-                        alert("ristorante eliminato")
+                        alert("ristorante eliminato");
                         window.location.href = './admin.html';
                     }
                     if (e.target && e.target.id === 'button_modify_' + i) {
@@ -190,12 +189,11 @@ if (type_database === "Realtime") {
                 if (e.target && e.target.id === 'button_delete_' + i) {
                     deleteDoc(doc(firebase, "ristoranti", pick.id));
                     const storage = getStorage(app);
-                    const desertRef = refS(storage, type_database + '/' + i + "/Menu");
+                    const desertRef = refS(storage, type_database + '/' + pick.id + "/Menu");
                     await deleteObject(desertRef).then(() => {
                         console.log("file eliminato");
                     }).catch((error) => {
-                        alert("file non eliminati");
-                        window.location.href = './admin.html';
+                        console.log("file non eliminato");
                     });
                     alert("ristorante eliminato");
                     window.location.href = './admin.html';
