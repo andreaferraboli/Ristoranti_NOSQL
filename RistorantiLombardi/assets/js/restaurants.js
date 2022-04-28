@@ -75,14 +75,18 @@ if (type_database === "Realtime") {
             <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
             <div class="card-item">
             <div class="col-sm-6">
-            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5></div>
-            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
-            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
-            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
-            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
-            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
-            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
-            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>   
+            <div class="justify-content-center">
+            <h5 class="card-title gold">Posizione:</h5>
+            <h5 class="card-title">${Via + ", " + N_civico + ", " + CAP + ", " + Città}</h5> 
+            </div>
+            <h5 class="card-title gold">Orari:</h5>
+            <h6 class="dropdown-content">Lunedi: ${Lunedi}</h6>
+            <h6 class="dropdown-content" >Martedi: ${Martedi}</h6>
+            <h6 class="dropdown-content" >Mercoledi: ${Mercoledi}</h6>
+            <h6 class="dropdown-content" >Giovedi: ${Giovedi}</h6>
+            <h6 class="dropdown-content" >Venerdi: ${Venerdi}</h6>
+            <h6 class="dropdown-content" >Sabato: ${Sabato}</h6>
+            <h6 class="dropdown-content" >Domenica: ${Domenica}</h6>                                              
             </div>
             <div class="col-sm-6">
             <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -148,14 +152,18 @@ if (type_database === "Realtime") {
             <div class="card-item"><p class="card-text">Valutazione: ${Valutazione}<span class="star" >&starf;</span></p></div>
             <div class="card-item">
             <div class="col-sm-6">
-            <div class="card-item"><h5 class="card-title">${Via + "," + N_civico + "," + CAP + ", " + Città}</h5> </div>
-            <a class="dropdown-content">Lunedi: ${Lunedi}</a><br>
-            <a class="dropdown-content" >Martedi: ${Martedi}</a><br>
-            <a class="dropdown-content" >Mercoledi: ${Mercoledi}</a><br>
-            <a class="dropdown-content" >Giovedi: ${Giovedi}</a><br>
-            <a class="dropdown-content" >Venerdi: ${Venerdi}</a><br>
-            <a class="dropdown-content" >Sabato: ${Sabato}</a><br>
-            <a class="dropdown-content" >Domenica: ${Domenica}</a><br>                                              
+            <div class="justify-content-center">
+            <h5 class="card-title gold">Posizione:</h5>
+            <h5 class="card-title">${Via + ", " + N_civico + ", " + CAP + ", " + Città}</h5> 
+            </div>
+            <h5 class="card-title gold">Orari:</h5>
+            <h6 class="dropdown-content">Lunedi: ${Lunedi}</h6>
+            <h6 class="dropdown-content" >Martedi: ${Martedi}</h6>
+            <h6 class="dropdown-content" >Mercoledi: ${Mercoledi}</h6>
+            <h6 class="dropdown-content" >Giovedi: ${Giovedi}</h6>
+            <h6 class="dropdown-content" >Venerdi: ${Venerdi}</h6>
+            <h6 class="dropdown-content" >Sabato: ${Sabato}</h6>
+            <h6 class="dropdown-content" >Domenica: ${Domenica}</h6>                                              
             </div>
             <div class="col-sm-6">
             <iframe src="${Mappa}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            
