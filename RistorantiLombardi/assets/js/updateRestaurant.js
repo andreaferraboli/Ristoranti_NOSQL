@@ -8,7 +8,7 @@ import {
     ref as sRef,
     uploadBytes
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
-import {firebaseConfig, type_database} from "./firebaseConfig.js";
+import {firebaseConfig} from "./firebaseConfig.js";
 import {doc, getDoc, getFirestore, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
@@ -21,7 +21,7 @@ self.firebase = getFirestore(app);
 const storage = getStorage(app);
 
 let currentId = localStorage.getItem('currentId');
-
+let type_database = localStorage.getItem("type_database");
 if(type_database==="Realtime"){
 
 
