@@ -53,7 +53,7 @@ if (type_database === "Realtime") {
                 CAP = obj[i].Posizione.CAP;
                 Città = obj[i].Posizione.Città;
                 Telefono = obj[i].Telefono;
-                Link = obj[i].Link;
+                Link = obj[i].Posizione.Link;
                 Mappa = obj[i].Posizione.Mappa;
                 Sito_web = obj[i].Sito_web;
                 Lunedi = obj[i].Orari.Lunedi;
@@ -126,7 +126,7 @@ if (type_database === "Realtime") {
                 CAP = Ristorante.Posizione.CAP;
                 Città = Ristorante.Posizione.Città;
                 Telefono = Ristorante.Telefono;
-                Link = Ristorante.Link;
+                Link = Ristorante.Posizione.Link;
                 Mappa = Ristorante.Posizione.Mappa;
                 Sito_web = Ristorante.Sito_web;
                 Lunedi = Ristorante.Orari.Lunedi;

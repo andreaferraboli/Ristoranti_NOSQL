@@ -107,9 +107,9 @@ if (type_database === "Realtime") {
                         const storage = getStorage(app);
                         const desertRef = refS(storage, type_database + '/' + i + "/Menu");
                         await deleteObject(desertRef).then(() => {
-                            console.log("file eliminato");
+                            alert("file eliminato");
                         }).catch((error) => {
-                            console.log(error);
+                            alert(error);
                         });
                         alert("ristorante eliminato");
                         window.location.href = './admin.html';
