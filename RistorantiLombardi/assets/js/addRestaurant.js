@@ -42,80 +42,75 @@ document.getElementById("submit").addEventListener('click', async () => {
     let sabato = document.getElementById("sabato").value;
     let domenica = document.getElementById("domenica").value;
     let file = document.getElementById('fileInput').files[0];
-    if (nome === "" || via === "" || numero_civico === "" || cap === "" || citta === "" || link === "" || maps === "" || recensione === "" || sito === "" ||
-        telefono === "" || immagine === "" || lunedi === "" || martedi === "" || mercoledi === "" || giovedi === "" || venerdi === "" || sabato === "" || domenica === "") {
-        alert("Compila tutti i campi");
+    if (validateFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false)
         return false;
-    }
-    if (file === undefined) {
-        alert("Carica un menù");
-        return false;
-    }
+    else {
+        let id;
+        if (type_database === "Realtime") {
+            console.log(nome);
+            id =
+                push(ref(self.database, 'Ristoranti/'), {
+                    Nome: nome,
+                    Posizione: {
+                        Via: via,
+                        N_civico: numero_civico,
+                        Città: citta,
+                        CAP: cap,
+                        Link: link,
+                        Mappa: maps
+                    },
+                    Orari: {
+                        Lunedi: lunedi,
+                        Martedi: martedi,
+                        Mercoledi: mercoledi,
+                        Giovedi: giovedi,
+                        Venerdi: venerdi,
+                        Sabato: sabato,
+                        Domenica: domenica
+                    },
+                    Valutazione: recensione,
+                    Sito_web: sito,
+                    Telefono: telefono,
+                    Img: immagine
+                }).key;
+        } else {
+            let newDoc = await addDoc(collection(self.firebase, "ristoranti"),
+                {
+                    Nome: nome,
+                    Posizione: {
+                        Via: via,
+                        N_civico: numero_civico,
+                        Città: citta,
+                        CAP: cap,
+                        Link: link,
+                        Mappa: maps
+                    },
+                    Orari: {
+                        Lunedi: lunedi,
+                        Martedi: martedi,
+                        Mercoledi: mercoledi,
+                        Giovedi: giovedi,
+                        Venerdi: venerdi,
+                        Sabato: sabato,
+                        Domenica: domenica
+                    },
+                    Valutazione: recensione,
+                    Sito_web: sito,
+                    Telefono: telefono,
+                    Img: immagine
+                });
+            id = newDoc.id;
+            console.log(id);
+        }
+        console.log(file);
+        const storage = getStorage(app);
+        const storageRef = sRef(storage, type_database + "/" + id + "/" + "Menu");
 
-let id;
-    if (type_database === "Realtime") {
-        console.log(nome);
-        id =
-            push(ref(self.database, 'Ristoranti/'), {
-                Nome: nome,
-                Posizione: {
-                    Via: via,
-                    N_civico: numero_civico,
-                    Città: citta,
-                    CAP: cap,
-                    Link: link,
-                    Mappa: maps
-                },
-                Orari: {
-                    Lunedi: lunedi,
-                    Martedi: martedi,
-                    Mercoledi: mercoledi,
-                    Giovedi: giovedi,
-                    Venerdi: venerdi,
-                    Sabato: sabato,
-                    Domenica: domenica
-                },
-                Valutazione: recensione,
-                Sito_web: sito,
-                Telefono: telefono,
-                Img: immagine
-            }).key;
-    } else {
-        let newDoc = await addDoc(collection(self.firebase, "ristoranti"),
-            {
-                Nome: nome,
-                Posizione: {
-                    Via: via,
-                    N_civico: numero_civico,
-                    Città: citta,
-                    CAP: cap,
-                    Link: link,
-                    Mappa: maps
-                },
-                Orari: {
-                    Lunedi: lunedi,
-                    Martedi: martedi,
-                    Mercoledi: mercoledi,
-                    Giovedi: giovedi,
-                    Venerdi: venerdi,
-                    Sabato: sabato,
-                    Domenica: domenica
-                },
-                Valutazione: recensione,
-                Sito_web: sito,
-                Telefono: telefono,
-                Img: immagine
-            });
-        id=newDoc.id;
-        console.log(id);
+        await uploadBytes(storageRef, file);
+
+        alert("Ristorante aggiunto correttamente!");
+        window.location.replace('../RistorantiLombardi/admin.html');
     }
-    console.log(file);
-    const storage = getStorage(app);
-    const storageRef = sRef(storage, type_database + "/" + id + "/" + "Menu");
-
-    await uploadBytes(storageRef, file);
-
-    alert("Ristorante aggiunto correttamente!");
-    window.location.replace('../RistorantiLombardi/admin.html');
 });
+
 
