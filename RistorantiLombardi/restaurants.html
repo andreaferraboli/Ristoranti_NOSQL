@@ -136,35 +136,54 @@
 
                 <div class="col-lg-8 mt-5 mt-lg-0">
 
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form action="#" role="form" class="php-email-form">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                <input type="text" name="name" class="form-control" id="name" placeholder="il tuo nome"
                                        required>
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
                                 <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="Your Email" required>
+                                       placeholder="La tua email" required>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Oggetto"
                                    required>
                         </div>
                         <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="8" placeholder="Message"
+                            <textarea id="message" class="form-control" name="message" rows="8" placeholder="Messaggio"
                                       required></textarea>
                         </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
                         <div class="text-center">
-                            <button type="submit">Send Message</button>
+                            <button id="submit_sendMessage" type="submit" >Invia Messaggio!</button>
                         </div>
                     </form>
-
+                    <script>
+                        function validateEmail(email)
+                        {
+                            let re = /\S+@\S+\.\S+/;
+                            return re.test(email);
+                        }
+                        document.getElementById("submit_sendMessage").addEventListener('click', () => {
+                            if(validateEmail(document.getElementById("email").value)) {
+                                Email.send({
+                                    Host: "smtp.gmail.com",
+                                    Username: "andrew.ferro04@gmail.com",
+                                    Password: "hacorvovhpdnzkoi",
+                                    To: 'andrew.ferro04@gmail.com',
+                                    From: document.getElementById("email").value,
+                                    Subject: document.getElementById("subject").value,
+                                    Body: document.getElementById("message").value
+                                }).then(message => {
+                                    alert(message + ": email mandata correttamente");
+                                    window.location.reload("index.html");
+                                })
+                            }else{
+                                alert("email non valida,riprovare");
+                            }
+                        });
+                    </script>
                 </div>
 
             </div>
@@ -187,7 +206,7 @@
                             La Fourchette SAS<br>
                             70, rue Saint-Lazare<br>
                             75009 Parigi, Francia<br><br>
-                            <strong>Phone:</strong> +39 06 8938 6375<br>
+                            <strong>Telefono:</strong> +39 06 8938 6375<br>
                             <strong>Email:</strong> contatto@thefork.it<br>
                         </p>
                         <div class="social-links mt-3">
@@ -237,7 +256,7 @@
 <!-- Template Main JS File -->
 <script src="vendor/bootstrap/main.js"></script>
 <script src="assets/js/restaurants.js" type="module"></script>
-
+<script src="https://smtpjs.com/v3/smtp.js"></script>
 </body>
 
 </html>

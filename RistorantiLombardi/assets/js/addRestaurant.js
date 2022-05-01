@@ -43,8 +43,8 @@ document.getElementById("submit").addEventListener('click',  async() => {
     let sabato = document.getElementById("sabato").value;
     let domenica = document.getElementById("domenica").value;
     let file = document.getElementById('fileInput').files[0];
-    if (validateAddFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) == false){
-        alert("Una o più delle informazioni inserite è sbagliata");
+    if (validateAddFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false){
+        // alert("Una o più delle informazioni inserite è sbagliata");
         return false;
     }
     else {
