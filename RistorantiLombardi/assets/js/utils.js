@@ -16,28 +16,32 @@ export function isNum(val) {
 
 export function validateCitta(input) {
     let cittalombarde = ["milano", "brescia", "bergamo", "sondrio", "mantova", "varese", "cremona", "como", "lecco", "lodi", "pavia", "monza e brianza"]
-    for (let citta in cittalombarde) {
-        if (citta.toLowerCase() === input) {
+    for (let citta of cittalombarde) {
+        if (citta === input.toLowerCase()) {
             return true;
         }
     }
+    alert("la città non è della Lombardia,riprovare");
     return false;
 }
 
-export function isValidURL(string) {
-    var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-    alert(string + "non è un link valido,riprovare");
+export function isValidURL(input) {
+    var res = input.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+
+    if (res === false)
+        alert(input + "non è un link valido,riprovare");
     return (res !== null)
 }
 
-export function notemptyInputUPDATE(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica) {
+export function notEmptyInputUpdate(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica) {
     if (nome === "" || via === "" || numero_civico === "" || cap === "" || citta === "" || link === "" || maps === "" || recensione === "" || sito === "" ||
         telefono === "" || immagine === "" || lunedi === "" || martedi === "" || mercoledi === "" || giovedi === "" || venerdi === "" || sabato === "" || domenica === "") {
         alert("Compila tutti i campi");
         return false;
     }
+    return true;
 }
-export function notemptyInputADD(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) {
+export function notEmptyInputAdd(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) {
     if (nome === "" || via === "" || numero_civico === "" || cap === "" || citta === "" || link === "" || maps === "" || recensione === "" || sito === "" ||
         telefono === "" || immagine === "" || lunedi === "" || martedi === "" || mercoledi === "" || giovedi === "" || venerdi === "" || sabato === "" || domenica === "") {
         alert("Compila tutti i campi");
@@ -47,8 +51,12 @@ export function notemptyInputADD(nome, via, numero_civico, cap, citta, link, map
         alert("Carica un menù");
         return false;
     }
+    return true;
 }
 
-export function validateFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) {
-    return notemptyInput(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) && isValidURL(link) && isValidURL(maps) && isValidURL(sito) && validateCitta(citta) && validateCAP(cap)
+export function validateUpdateFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica) {
+    return notEmptyInputUpdate(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica) && isValidURL(link) && isValidURL(maps) && isValidURL(sito) && validateCitta(citta) && validateCAP(cap)
+}
+export function validateAddFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) {
+    return notEmptyInputAdd(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) && isValidURL(link) && isValidURL(maps) && isValidURL(sito) && validateCitta(citta) && validateCAP(cap)
 }

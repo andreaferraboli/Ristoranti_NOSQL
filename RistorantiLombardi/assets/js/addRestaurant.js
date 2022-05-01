@@ -3,6 +3,7 @@ import {getDatabase, push, ref} from "https://www.gstatic.com/firebasejs/9.6.9/f
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js";
 import {firebaseConfig} from "./firebaseConfig.js";
 import {addDoc, collection, getFirestore} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
+import {validateAddFormRestaurant} from "./utils.js";
 
 
 // Initialize Firebase
@@ -22,7 +23,8 @@ document.getElementById("type_database").addEventListener('click', (e) => {
     }
     window.location.reload("./restaurants.html");
 });
-document.getElementById("submit").addEventListener('click', async () => {
+document.getElementById("submit").addEventListener('click',  async() => {
+    console.log("ciao");
     let nome = document.getElementById("nome").value;
     let via = document.getElementById("via").value;
     let numero_civico = document.getElementById("numero_civico").value;
@@ -42,7 +44,7 @@ document.getElementById("submit").addEventListener('click', async () => {
     let sabato = document.getElementById("sabato").value;
     let domenica = document.getElementById("domenica").value;
     let file = document.getElementById('fileInput').files[0];
-    if (validateFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false)
+    if (validateAddFormRestaurant(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false)
         return false;
     else {
         let id;
@@ -74,6 +76,7 @@ document.getElementById("submit").addEventListener('click', async () => {
                     Img: immagine
                 }).key;
         } else {
+            console.log(nome);
             let newDoc = await addDoc(collection(self.firebase, "ristoranti"),
                 {
                     Nome: nome,

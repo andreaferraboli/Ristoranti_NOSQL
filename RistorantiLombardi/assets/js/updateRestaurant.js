@@ -9,7 +9,7 @@ import {
     uploadBytes
 } from "https://www.gstatic.com/firebasejs/9.6.9/firebase-storage.js";
 import {firebaseConfig} from "./firebaseConfig.js";
-import {validateFormRestaurantUPDATE} from "./utils.js";
+import { validateUpdateFormRestaurant} from "./utils.js";
 import {doc, getDoc, getFirestore, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.9/firebase-firestore.js";
 
 
@@ -67,7 +67,7 @@ if (type_database === "Realtime") {
         downloadFile().then();
     });
     document.getElementById('update').onclick = async function () {
-        if (validateFormRestaurantUPDATE(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false)
+        if (validateUpdateFormRestaurant(nome.value, via.value, numero_civico.value, cap.value, citta.value, link.value, maps.value, recensione.value, sito.value, telefono.value, immagine.value, lunedi.value, martedi.value, mercoledi.value, giovedi.value, venerdi.value, sabato.value, domenica.value) === false)
             return false;
         else {
             await update(dbRef, {
@@ -94,7 +94,7 @@ if (type_database === "Realtime") {
                 Telefono: telefono.value,
                 Img: immagine.value
             });
-            if (file.files.length !== 0) {
+            if (file !== undefined) {
                 console.log("file selezionato");
                 let currentFile = file;
                 const storageRef = sRef(storage, type_database + "/" + currentId + "/" + "Menu");
@@ -111,7 +111,6 @@ if (type_database === "Realtime") {
     if (Restaurant !== undefined) {
 
         let Ristorante = Restaurant;
-        console.log(Ristorante);
         nome.value = Ristorante.Nome;
         immagine.value = Ristorante.Img;
         recensione.value = Ristorante.Valutazione;
@@ -132,8 +131,7 @@ if (type_database === "Realtime") {
         domenica.value = Ristorante.Orari.Domenica;
         downloadFile().then();
         document.getElementById('update').onclick = async function () {
-            console.log(document.getElementById("recensione").value);
-            if (validateFormRestaurantUPDATE(nome, via, numero_civico, cap, citta, link, maps, recensione, sito, telefono, immagine, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica, file) === false)
+            if (validateUpdateFormRestaurant(nome.value, via.value, numero_civico.value, cap.value, citta.value, link.value, maps.value, recensione.value, sito.value, telefono.value, immagine.value, lunedi.value, martedi.value, mercoledi.value, giovedi.value, venerdi.value, sabato.value, domenica.value) === false)
                 return false;
             else {
                 await updateDoc(doc(self.firebase, 'ristoranti', localStorage.getItem("currentId")), {
@@ -160,7 +158,7 @@ if (type_database === "Realtime") {
                     Telefono: telefono.value,
                     Img: immagine.value
                 });
-                if (file.files.length !== 0) {
+                if (file !== undefined) {
                     console.log("file selezionato");
                     let currentFile = file;
                     const storageRef = sRef(storage, type_database + "/" + currentId + "/" + "Menu");
